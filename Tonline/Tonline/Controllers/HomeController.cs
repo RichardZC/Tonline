@@ -11,7 +11,9 @@ namespace Tonline.Controllers
         // GET: Home
         public ActionResult Index()
         {
+            
             return View();
         }
+      
     }
 }
