@@ -6,13 +6,12 @@ using System.Web.Mvc;
 
 namespace Tonline.Controllers
 {
-    public class HomeController : Controller
+    public class DetalleController : Controller
     {
-        // GET: Home
+        // GET: Detalle
         public ActionResult Index()
-        {            
+        {
             return View();
         }
-      
     }
 }
