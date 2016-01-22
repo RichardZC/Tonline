@@ -1,11 +1,14 @@
-/*================================================================================
-	Item Name: Materialize - Material Design Admin Template
-	Version: 3.0
-	Author: GeeksLabs
-	Author URL: http://www.themeforest.net/user/geekslabs
-================================================================================
+.borde {
+    border: 1px solid red;
+}
+.collection .collection-item.avatar {
+    min-height:50px;
+}
+.row {
+    margin-bottom: 0;
+}
+.font2em {
+    font-size: 2em;
+    text-align: center;
+}
 
-NOTE:
-------
-PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
-WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */

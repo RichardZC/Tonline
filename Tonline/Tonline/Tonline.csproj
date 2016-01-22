@@ -117,6 +117,7 @@
     <Content Include="images\user-bg.jpg" />
     <Content Include="js\custom-script.js" />
     <Content Include="js\materialize.min.js" />
+    <Content Include="js\plugins.js" />
     <Content Include="js\plugins.min.js" />
     <Content Include="js\plugins\angular-materialize.js" />
     <Content Include="js\plugins\angular.min.js" />
@@ -227,7 +228,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Shared\_Layout - Copia.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
