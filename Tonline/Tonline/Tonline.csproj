@@ -129,8 +129,8 @@
     <Content Include="images\gallary\7.jpg" />
     <Content Include="images\gallary\8.jpg" />
     <Content Include="images\gallary\9.jpg" />
-    <Content Include="images\gallary\lado.jpg" />
     <Content Include="images\gallary\Lenovo.jpg" />
+    <Content Include="images\gallary\mouse.jpg" />
     <Content Include="images\gallary\tapa.jpg" />
     <Content Include="images\gallary\teclado.jpg" />
     <Content Include="images\generic-logo.png" />
