@@ -116,6 +116,156 @@
             <!-- END CONTENT -->
             <!-- //////////////////////////////////////////////////////////////////////////// -->
 
+            <!-- INICIAR SESION-->
+            <div id="modal2" class="modal fixed-footer" style="width:370px">
+                <div class="modal-content teal ">
+
+                    <div id="login-page" class="row">
+                        <div class="col s12 m12 l12 card-panel">
+                            <form class="login-form">
+                                <div class="row">
+                                    <div class="input-field col s12 center">
+                                        <p class="center login-form-text"><h4>INICIAR SESIÓN</h4></p>
+                                    </div>
+                                </div>
+                                <div class="row margin">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-social-person-outline prefix"></i>
+                                        <input id="username" type="text">
+                                        <label for="username" class="center-align">USUARIO</label>
+                                    </div>
+                                </div>
+                                <div class="row margin">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-action-lock-outline prefix"></i>
+                                        <input id="password" type="password">
+                                        <label for="password">CONTRASEÑA</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12 m12 l12  login-text">
+                                        <input type="checkbox" id="remember-me" />
+                                        <label for="remember-me">Recordar mi Cuenta</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <a href="index.html" class="btn waves-effect waves-light col s12">INICIAR</a>
+                                    </div>
+                                </div>
+                                <div class="row" style="font-size:smaller">
+                                    <div class="input-field col s6 m6 l6">
+                                        <a href="#modal3" class="waves-effect waves-block waves-light modal-trigger">¡Registrarse Ahora!</a>
+                                    </div>
+                                    <div class="input-field col s6 m6 l6">
+                                        <a href="#modal4" class="waves-effect waves-block waves-light modal-trigger">¿Olvido su Contraseña?</a>
+                                    </div>
+                                </div>
+                                <p></p>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- REGISTRARSE-->
+            <div id="modal3" class="modal fixed-footer" style="width:370px">
+                <div class="modal-content teal">
+
+                    <div id="login-page" class="row">
+                        <div class="col s12 m12 l12 z-depth-4 card-panel">
+                            <form class="login-form">
+                                <div class="row">
+                                    <div class="input-field col s12 center">
+                                        <p class="center">REGISTRO NUEVO USUARIO</p>
+                                    </div>
+                                </div>
+                                <div class="row margin">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-social-person-outline prefix"></i>
+                                        <input id="username" type="text">
+                                        <label for="username" class="center-align">Usuario</label>
+                                    </div>
+                                </div>
+                                <div class="row margin">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-communication-email prefix"></i>
+                                        <input id="email" type="email">
+                                        <label for="email" class="center-align">Email</label>
+                                    </div>
+                                </div>
+                                <div class="row margin">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-action-lock-outline prefix"></i>
+                                        <input id="password" type="password">
+                                        <label for="password">Contraseña</label>
+                                    </div>
+                                </div>
+                                <div class="row margin">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-action-lock-outline prefix"></i>
+                                        <input id="password-again" type="password">
+                                        <label for="password-again">Repita la Contraseña</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <a href="index.html" class="btn waves-effect waves-light col s12">Registrarse Ahora!</a>
+                                    </div>
+                                    <div class="input-field col s12">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- OLVIDO CONTRASEÑA-->
+            <div id="modal4" class="modal fixed-footer" style="width:370px">
+                <div class="modal-content teal">
+
+                    <div id="login-page" class="row">
+                        <div class="col s12 m12 l12 z-depth-4 card-panel">
+                            <form class="login-form">
+                                <div class="row">
+                                    <div class="input-field col s12 center">
+                                        <h4>¿Olvido su Contraseña?</h4>
+                                        <p class="center">Puede Restablecerla</p>
+                                    </div>
+                                </div>
+                                <div class="row margin">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-social-person-outline prefix"></i>
+                                        <input id="username" type="text">
+                                        <label for="username" class="center-align">Usuario</label>
+                                    </div>
+                                </div>
+                                <div class="row margin">
+                                    <div class="input-field col s12">
+                                        <i class="mdi-action-lock-outline prefix"></i>
+                                        <input id="password" type="password">
+                                        <label for="password">Contraseña</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <a href="index.html" class="btn waves-effect waves-light col s12">Restablecer Contraseña</a>
+                                    </div>
+                                    <div class="input-field col s12">
+                                        <p class="margin sign-up"><a href="page-login.html">Loguearse</a> <a href="page-register.html" class="right">Registrarse</a></p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- CARRITO-->
             <div id="modal5" class="modal bottom-sheet">
                 <div class="modal-content">
