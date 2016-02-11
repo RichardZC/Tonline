@@ -1,33 +1,72 @@
-﻿@model IEnumerable<BE.categoria>
+﻿@using System.Web.Script.Services
+@model IEnumerable<BE.categoria>
 
-@{
-    ViewBag.Title = "Index";
+<div ng-app="myapp">
+    <div ng-controller="myctrl">
+        <div class="form-horizontal">
+            <h4>categoria</h4>
+            <hr/>
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <div class="form-group">
+                <label class="control-label col-md-2">Categoria</label>
+                <div class="col-md-10">
+                    <input type="text" class="form-control" ng-model="cat.Denominacion"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">Rubro</label>
+                <div class="col-md-10">
+
+                    @Html.
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" value="Crear" class="btn btn-default" ng-click="CrearCategoria()"/>
+                </div>
+            </div>
+        </div>
+
+        <table class="table ">
+            <tr ng-repeat="item in lista">
+                <td>{{item.CategoriaId}}</td>
+                <td>{{item.Denominacion}}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+
+
+@section scripts{
+    <script>
+        var myapp = angular.module("myapp", []);
+        myapp.controller("myctrl", function($scope, $http) {
+            $scope.lista = [];
+            $http.get('@Url.Action("Lista", "Categoria")').
+                success(function(data) {
+                    $scope.lista = data;
+                }).error(function(data) {
+
+                });
+            $scope.CrearCategoria = function() {
+                $http({
+                        traditional: true,
+                        url: '@Url.Action("Create", "Categoria")',
+                        method: 'POST',
+                        data: JSON.stringify($scope.cat),
+                        dataType: 'json'
+                    })
+                    .success(function(data) {
+                        $scope.lista.push(data);
+                        delete $scope.cat;
+                    })
+                    .error(function (data) {
+
+                    });
+            }
+        });
+    </script>
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Denominacion)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Denominacion)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoriaId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoriaId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CategoriaId })
-        </td>
-    </tr>
-}
-
-</table>

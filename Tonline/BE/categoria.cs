@@ -14,7 +14,18 @@ namespace BE
     
     public partial class categoria
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public categoria()
+        {
+            this.articulo = new HashSet<articulo>();
+        }
+    
         public int CategoriaId { get; set; }
         public string Denominacion { get; set; }
+        public Nullable<int> RubroId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<articulo> articulo { get; set; }
+        public virtual rubro rubro { get; set; }
     }
 }

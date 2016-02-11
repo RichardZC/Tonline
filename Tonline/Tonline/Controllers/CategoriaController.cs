@@ -18,7 +18,12 @@ namespace Tonline.Controllers
         // GET: Categoria
         public ActionResult Index()
         {
-            return View(CategoriaBl.Listar());
+            //ViewBag.RubroSelect = SelectList(CategoriaBl.Listar(), "RubroId");
+            return View();
+        }
+        public JsonResult Lista()
+        {
+            return Json(CategoriaBl.Listar(), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Categoria/Details/5
@@ -46,16 +51,14 @@ namespace Tonline.Controllers
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoriaId,Denominacion")] categoria categoria)
+        public JsonResult Create(categoria categoria)
         {
             if (ModelState.IsValid)
             {
                 CategoriaBl.Crear(categoria);
-                return RedirectToAction("Index");
+                return Json(categoria,JsonRequestBehavior.AllowGet) ;
             }
-
-            return View(categoria);
+            return Json(false, JsonRequestBehavior.AllowGet); ;
         }
 
         // GET: Categoria/Edit/5
