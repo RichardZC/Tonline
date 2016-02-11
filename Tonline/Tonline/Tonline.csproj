@@ -160,6 +160,7 @@
     <Content Include="images\img8.jpg" />
     <Content Include="images\materialize-logo.png" />
     <Content Include="images\user-bg.jpg" />
+    <Content Include="images\user-profile-bg.jpg" />
     <Content Include="js\custom-script.js" />
     <Content Include="js\materialize.min.js" />
     <Content Include="js\plugins.js" />
@@ -237,6 +238,11 @@
     <Content Include="js\plugins\xcharts\xcharts-script.js" />
     <Content Include="js\plugins\xcharts\xcharts.min.css" />
     <Content Include="js\plugins\xcharts\xcharts.min.js" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="js\plugins\dropify\fonts\dropify.woff" />
@@ -267,6 +273,8 @@
     <Content Include="font\roboto\Roboto-Thin.eot" />
     <Content Include="font\roboto\Roboto-Thin.ttf" />
     <Content Include="font\roboto\Roboto-Thin.woff" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -277,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\DetalleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -304,6 +313,7 @@
     <Content Include="Views\Categoria\Details.cshtml" />
     <Content Include="Views\Categoria\Edit.cshtml" />
     <Content Include="Views\Categoria\Index.cshtml" />
+    <Content Include="Views\Articulo\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

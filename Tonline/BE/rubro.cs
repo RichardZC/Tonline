@@ -12,20 +12,18 @@ namespace BE
     using System;
     using System.Collections.Generic;
     
-    public partial class categoria
+    public partial class rubro
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public categoria()
+        public rubro()
         {
-            this.articulo = new HashSet<articulo>();
+            this.categoria = new HashSet<categoria>();
         }
     
-        public int CategoriaId { get; set; }
+        public int RubroId { get; set; }
         public string Denominacion { get; set; }
-        public Nullable<int> RubroId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<articulo> articulo { get; set; }
-        public virtual rubro rubro { get; set; }
+        public virtual ICollection<categoria> categoria { get; set; }
     }
 }

@@ -12,20 +12,23 @@ namespace BE
     using System;
     using System.Collections.Generic;
     
-    public partial class categoria
+    public partial class almacen
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public categoria()
+        public almacen()
         {
-            this.articulo = new HashSet<articulo>();
+            this.inventario = new HashSet<inventario>();
+            this.movimiento = new HashSet<movimiento>();
         }
     
-        public int CategoriaId { get; set; }
+        public int AlmacenId { get; set; }
         public string Denominacion { get; set; }
-        public Nullable<int> RubroId { get; set; }
+        public int LocalId { get; set; }
     
+        public virtual local local { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<articulo> articulo { get; set; }
-        public virtual rubro rubro { get; set; }
+        public virtual ICollection<inventario> inventario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<movimiento> movimiento { get; set; }
     }
 }

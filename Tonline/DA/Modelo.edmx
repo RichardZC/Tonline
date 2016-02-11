@@ -4,43 +4,983 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BDModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BDModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="almacen">
+          <Key>
+            <PropertyRef Name="AlmacenId" />
+          </Key>
+          <Property Name="AlmacenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="LocalId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="articulo">
+          <Key>
+            <PropertyRef Name="ArticuloId" />
+          </Key>
+          <Property Name="ArticuloId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MarcaId" Type="int" Nullable="false" />
+          <Property Name="CategoriaId" Type="int" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="255" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="1024" />
+          <Property Name="Imagen" Type="varchar" MaxLength="255" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="categoria">
           <Key>
             <PropertyRef Name="CategoriaId" />
           </Key>
           <Property Name="CategoriaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="255" />
+          <Property Name="RubroId" Type="int" />
+        </EntityType>
+        <EntityType Name="direccion">
+          <Key>
+            <PropertyRef Name="DireccionId" />
+          </Key>
+          <Property Name="DireccionId" Type="int" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="500" />
+          <Property Name="Referencia" Type="varchar" MaxLength="500" />
+          <Property Name="PersonaId" Type="int" />
+        </EntityType>
+        <EntityType Name="inventario">
+          <Key>
+            <PropertyRef Name="AlmacenId" />
+            <PropertyRef Name="ArticuloId" />
+          </Key>
+          <Property Name="AlmacenId" Type="int" Nullable="false" />
+          <Property Name="ArticuloId" Type="int" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="Ubicacion" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="local">
+          <Key>
+            <PropertyRef Name="LocalId" />
+          </Key>
+          <Property Name="LocalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Direccion" Type="varchar" MaxLength="400" />
+          <Property Name="Telefono" Type="varchar" MaxLength="9" />
+        </EntityType>
+        <EntityType Name="marca">
+          <Key>
+            <PropertyRef Name="MarcaId" />
+          </Key>
+          <Property Name="MarcaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Denominacion" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="movimiento">
+          <Key>
+            <PropertyRef Name="MovimientoId" />
+          </Key>
+          <Property Name="MovimientoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlmacenId" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="enum" Nullable="false" />
+          <Property Name="Operacion" Type="enum" Nullable="false" />
+          <Property Name="Estado" Type="enum" />
+          <Property Name="PersonaId" Type="int" Nullable="false" />
+          <Property Name="Fecha" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="SubTotal" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="IGV" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="Ajuste" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="Total" Type="decimal" Precision="15" Scale="2" Nullable="false" />
+          <Property Name="Glosa" Type="varchar" MaxLength="255" />
+          <Property Name="Documento" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="movimientodet">
+          <Key>
+            <PropertyRef Name="MovimientoDetId" />
+          </Key>
+          <Property Name="MovimientoDetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MovimientoId" Type="int" />
+          <Property Name="ArticuloId" Type="int" />
+          <Property Name="Cantidad" Type="int" />
+          <Property Name="Precio" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Importe" Type="decimal" Precision="15" Scale="2" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="PersonaId" />
+          </Key>
+          <Property Name="PersonaId" Type="int" Nullable="false" />
+          <Property Name="Tipo" Type="enum" Nullable="false" />
+          <Property Name="Nombres" Type="varchar" MaxLength="60" Nullable="false" />
+          <Property Name="Paterno" Type="varchar" MaxLength="60" />
+          <Property Name="Materno" Type="varchar" MaxLength="60" />
+          <Property Name="TipoDocumento" Type="enum" Nullable="false" />
+          <Property Name="NroDocumento" Type="varchar" MaxLength="11" Nullable="false" />
+          <Property Name="Celular" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" />
+          <Property Name="Sexo" Type="enum" />
+          <Property Name="FechaNacimiento" Type="date" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rubro">
+          <Key>
+            <PropertyRef Name="RubroId" />
+          </Key>
+          <Property Name="RubroId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Denominacion" Type="varchar" MaxLength="255" Nullable="false" />
         </EntityType>
+        <EntityType Name="serie">
+          <Key>
+            <PropertyRef Name="SerieId" />
+          </Key>
+          <Property Name="SerieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="30" />
+          <Property Name="ArticuloId" Type="int" />
+          <Property Name="MovimientoDetEntId" Type="int" />
+          <Property Name="MovimientoDetSalId" Type="int" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PersonaId" Type="int" Nullable="false" />
+          <Property Name="IndAdm" Type="bit" Nullable="false" />
+          <Property Name="Estado" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="fkAlmacenLocal">
+          <End Role="local" Type="Self.local" Multiplicity="1" />
+          <End Role="almacen" Type="Self.almacen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="local">
+              <PropertyRef Name="LocalId" />
+            </Principal>
+            <Dependent Role="almacen">
+              <PropertyRef Name="LocalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkArticuloCategoria">
+          <End Role="categoria" Type="Self.categoria" Multiplicity="1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="CategoriaId" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkArticuloMarca">
+          <End Role="marca" Type="Self.marca" Multiplicity="1" />
+          <End Role="articulo" Type="Self.articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marca">
+              <PropertyRef Name="MarcaId" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="MarcaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkArticuloSerie">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="0..1" />
+          <End Role="serie" Type="Self.serie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="ArticuloId" />
+            </Principal>
+            <Dependent Role="serie">
+              <PropertyRef Name="ArticuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkentradaserie">
+          <End Role="movimientodet" Type="Self.movimientodet" Multiplicity="0..1" />
+          <End Role="serie" Type="Self.serie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movimientodet">
+              <PropertyRef Name="MovimientoDetId" />
+            </Principal>
+            <Dependent Role="serie">
+              <PropertyRef Name="MovimientoDetEntId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkInventarioAlmacen">
+          <End Role="almacen" Type="Self.almacen" Multiplicity="1" />
+          <End Role="inventario" Type="Self.inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="almacen">
+              <PropertyRef Name="AlmacenId" />
+            </Principal>
+            <Dependent Role="inventario">
+              <PropertyRef Name="AlmacenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkInventarioArticulo">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="1" />
+          <End Role="inventario" Type="Self.inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="ArticuloId" />
+            </Principal>
+            <Dependent Role="inventario">
+              <PropertyRef Name="ArticuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkMovDetArticulo">
+          <End Role="articulo" Type="Self.articulo" Multiplicity="0..1" />
+          <End Role="movimientodet" Type="Self.movimientodet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="ArticuloId" />
+            </Principal>
+            <Dependent Role="movimientodet">
+              <PropertyRef Name="ArticuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkMovDetMov">
+          <End Role="movimiento" Type="Self.movimiento" Multiplicity="0..1" />
+          <End Role="movimientodet" Type="Self.movimientodet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movimiento">
+              <PropertyRef Name="MovimientoId" />
+            </Principal>
+            <Dependent Role="movimientodet">
+              <PropertyRef Name="MovimientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkMovimientoAlmacen">
+          <End Role="almacen" Type="Self.almacen" Multiplicity="1" />
+          <End Role="movimiento" Type="Self.movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="almacen">
+              <PropertyRef Name="AlmacenId" />
+            </Principal>
+            <Dependent Role="movimiento">
+              <PropertyRef Name="AlmacenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkPersonaDireccion">
+          <End Role="persona" Type="Self.persona" Multiplicity="0..1" />
+          <End Role="direccion" Type="Self.direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="PersonaId" />
+            </Principal>
+            <Dependent Role="direccion">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkPersonaId">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="movimiento" Type="Self.movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="PersonaId" />
+            </Principal>
+            <Dependent Role="movimiento">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkRubroCategoria">
+          <End Role="rubro" Type="Self.rubro" Multiplicity="0..1" />
+          <End Role="categoria" Type="Self.categoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rubro">
+              <PropertyRef Name="RubroId" />
+            </Principal>
+            <Dependent Role="categoria">
+              <PropertyRef Name="RubroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fksalidaserie">
+          <End Role="movimientodet" Type="Self.movimientodet" Multiplicity="0..1" />
+          <End Role="serie" Type="Self.serie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movimientodet">
+              <PropertyRef Name="MovimientoDetId" />
+            </Principal>
+            <Dependent Role="serie">
+              <PropertyRef Name="MovimientoDetSalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkUsuarioPersona">
+          <End Role="persona" Type="Self.persona" Multiplicity="1" />
+          <End Role="usuario" Type="Self.usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="PersonaId" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BDModelStoreContainer">
+          <EntitySet Name="almacen" EntityType="Self.almacen" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="articulo" EntityType="Self.articulo" Schema="tonline" store:Type="Tables" />
           <EntitySet Name="categoria" EntityType="Self.categoria" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="direccion" EntityType="Self.direccion" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="inventario" EntityType="Self.inventario" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="local" EntityType="Self.local" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="marca" EntityType="Self.marca" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="movimiento" EntityType="Self.movimiento" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="movimientodet" EntityType="Self.movimientodet" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="persona" EntityType="Self.persona" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="rubro" EntityType="Self.rubro" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="serie" EntityType="Self.serie" Schema="tonline" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="tonline" store:Type="Tables" />
+          <AssociationSet Name="fkAlmacenLocal" Association="Self.fkAlmacenLocal">
+            <End Role="local" EntitySet="local" />
+            <End Role="almacen" EntitySet="almacen" />
+          </AssociationSet>
+          <AssociationSet Name="fkArticuloCategoria" Association="Self.fkArticuloCategoria">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="articulo" EntitySet="articulo" />
+          </AssociationSet>
+          <AssociationSet Name="fkArticuloMarca" Association="Self.fkArticuloMarca">
+            <End Role="marca" EntitySet="marca" />
+            <End Role="articulo" EntitySet="articulo" />
+          </AssociationSet>
+          <AssociationSet Name="fkArticuloSerie" Association="Self.fkArticuloSerie">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="serie" EntitySet="serie" />
+          </AssociationSet>
+          <AssociationSet Name="fkentradaserie" Association="Self.fkentradaserie">
+            <End Role="movimientodet" EntitySet="movimientodet" />
+            <End Role="serie" EntitySet="serie" />
+          </AssociationSet>
+          <AssociationSet Name="fkInventarioAlmacen" Association="Self.fkInventarioAlmacen">
+            <End Role="almacen" EntitySet="almacen" />
+            <End Role="inventario" EntitySet="inventario" />
+          </AssociationSet>
+          <AssociationSet Name="fkInventarioArticulo" Association="Self.fkInventarioArticulo">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="inventario" EntitySet="inventario" />
+          </AssociationSet>
+          <AssociationSet Name="fkMovDetArticulo" Association="Self.fkMovDetArticulo">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="movimientodet" EntitySet="movimientodet" />
+          </AssociationSet>
+          <AssociationSet Name="fkMovDetMov" Association="Self.fkMovDetMov">
+            <End Role="movimiento" EntitySet="movimiento" />
+            <End Role="movimientodet" EntitySet="movimientodet" />
+          </AssociationSet>
+          <AssociationSet Name="fkMovimientoAlmacen" Association="Self.fkMovimientoAlmacen">
+            <End Role="almacen" EntitySet="almacen" />
+            <End Role="movimiento" EntitySet="movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="fkPersonaDireccion" Association="Self.fkPersonaDireccion">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="direccion" EntitySet="direccion" />
+          </AssociationSet>
+          <AssociationSet Name="fkPersonaId" Association="Self.fkPersonaId">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="movimiento" EntitySet="movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="fkRubroCategoria" Association="Self.fkRubroCategoria">
+            <End Role="rubro" EntitySet="rubro" />
+            <End Role="categoria" EntitySet="categoria" />
+          </AssociationSet>
+          <AssociationSet Name="fksalidaserie" Association="Self.fksalidaserie">
+            <End Role="movimientodet" EntitySet="movimientodet" />
+            <End Role="serie" EntitySet="serie" />
+          </AssociationSet>
+          <AssociationSet Name="fkUsuarioPersona" Association="Self.fkUsuarioPersona">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="almacen" EntityType="BDModel.almacen" />
+          <EntitySet Name="articulo" EntityType="BDModel.articulo" />
+          <EntitySet Name="categoria" EntityType="BDModel.categoria" />
+          <EntitySet Name="direccion" EntityType="BDModel.direccion" />
+          <EntitySet Name="inventario" EntityType="BDModel.inventario" />
+          <EntitySet Name="local" EntityType="BDModel.local" />
+          <EntitySet Name="marca" EntityType="BDModel.marca" />
+          <EntitySet Name="movimiento" EntityType="BDModel.movimiento" />
+          <EntitySet Name="movimientodet" EntityType="BDModel.movimientodet" />
+          <EntitySet Name="persona" EntityType="BDModel.persona" />
+          <EntitySet Name="rubro" EntityType="BDModel.rubro" />
+          <EntitySet Name="serie" EntityType="BDModel.serie" />
+          <EntitySet Name="usuario" EntityType="BDModel.usuario" />
+          <AssociationSet Name="fkAlmacenLocal" Association="BDModel.fkAlmacenLocal">
+            <End Role="local" EntitySet="local" />
+            <End Role="almacen" EntitySet="almacen" />
+          </AssociationSet>
+          <AssociationSet Name="fkInventarioAlmacen" Association="BDModel.fkInventarioAlmacen">
+            <End Role="almacen" EntitySet="almacen" />
+            <End Role="inventario" EntitySet="inventario" />
+          </AssociationSet>
+          <AssociationSet Name="fkMovimientoAlmacen" Association="BDModel.fkMovimientoAlmacen">
+            <End Role="almacen" EntitySet="almacen" />
+            <End Role="movimiento" EntitySet="movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="fkArticuloCategoria" Association="BDModel.fkArticuloCategoria">
+            <End Role="categoria" EntitySet="categoria" />
+            <End Role="articulo" EntitySet="articulo" />
+          </AssociationSet>
+          <AssociationSet Name="fkArticuloMarca" Association="BDModel.fkArticuloMarca">
+            <End Role="marca" EntitySet="marca" />
+            <End Role="articulo" EntitySet="articulo" />
+          </AssociationSet>
+          <AssociationSet Name="fkArticuloSerie" Association="BDModel.fkArticuloSerie">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="serie" EntitySet="serie" />
+          </AssociationSet>
+          <AssociationSet Name="fkInventarioArticulo" Association="BDModel.fkInventarioArticulo">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="inventario" EntitySet="inventario" />
+          </AssociationSet>
+          <AssociationSet Name="fkMovDetArticulo" Association="BDModel.fkMovDetArticulo">
+            <End Role="articulo" EntitySet="articulo" />
+            <End Role="movimientodet" EntitySet="movimientodet" />
+          </AssociationSet>
+          <AssociationSet Name="fkRubroCategoria" Association="BDModel.fkRubroCategoria">
+            <End Role="rubro" EntitySet="rubro" />
+            <End Role="categoria" EntitySet="categoria" />
+          </AssociationSet>
+          <AssociationSet Name="fkPersonaDireccion" Association="BDModel.fkPersonaDireccion">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="direccion" EntitySet="direccion" />
+          </AssociationSet>
+          <AssociationSet Name="fkMovDetMov" Association="BDModel.fkMovDetMov">
+            <End Role="movimiento" EntitySet="movimiento" />
+            <End Role="movimientodet" EntitySet="movimientodet" />
+          </AssociationSet>
+          <AssociationSet Name="fkPersonaId" Association="BDModel.fkPersonaId">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="movimiento" EntitySet="movimiento" />
+          </AssociationSet>
+          <AssociationSet Name="fkentradaserie" Association="BDModel.fkentradaserie">
+            <End Role="movimientodet" EntitySet="movimientodet" />
+            <End Role="serie" EntitySet="serie" />
+          </AssociationSet>
+          <AssociationSet Name="fksalidaserie" Association="BDModel.fksalidaserie">
+            <End Role="movimientodet" EntitySet="movimientodet" />
+            <End Role="serie" EntitySet="serie" />
+          </AssociationSet>
+          <AssociationSet Name="fkUsuarioPersona" Association="BDModel.fkUsuarioPersona">
+            <End Role="persona" EntitySet="persona" />
+            <End Role="usuario" EntitySet="usuario" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="almacen">
+          <Key>
+            <PropertyRef Name="AlmacenId" />
+          </Key>
+          <Property Name="AlmacenId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LocalId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="local" Relationship="BDModel.fkAlmacenLocal" FromRole="almacen" ToRole="local" />
+          <NavigationProperty Name="inventario" Relationship="BDModel.fkInventarioAlmacen" FromRole="almacen" ToRole="inventario" />
+          <NavigationProperty Name="movimiento" Relationship="BDModel.fkMovimientoAlmacen" FromRole="almacen" ToRole="movimiento" />
+        </EntityType>
+        <EntityType Name="articulo">
+          <Key>
+            <PropertyRef Name="ArticuloId" />
+          </Key>
+          <Property Name="ArticuloId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarcaId" Type="Int32" Nullable="false" />
+          <Property Name="CategoriaId" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="1024" FixedLength="false" Unicode="false" />
+          <Property Name="Imagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="categoria" Relationship="BDModel.fkArticuloCategoria" FromRole="articulo" ToRole="categoria" />
+          <NavigationProperty Name="marca" Relationship="BDModel.fkArticuloMarca" FromRole="articulo" ToRole="marca" />
+          <NavigationProperty Name="serie" Relationship="BDModel.fkArticuloSerie" FromRole="articulo" ToRole="serie" />
+          <NavigationProperty Name="inventario" Relationship="BDModel.fkInventarioArticulo" FromRole="articulo" ToRole="inventario" />
+          <NavigationProperty Name="movimientodet" Relationship="BDModel.fkMovDetArticulo" FromRole="articulo" ToRole="movimientodet" />
+        </EntityType>
         <EntityType Name="categoria">
           <Key>
             <PropertyRef Name="CategoriaId" />
           </Key>
           <Property Name="CategoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Denominacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Denominacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="RubroId" Type="Int32" />
+          <NavigationProperty Name="articulo" Relationship="BDModel.fkArticuloCategoria" FromRole="categoria" ToRole="articulo" />
+          <NavigationProperty Name="rubro" Relationship="BDModel.fkRubroCategoria" FromRole="categoria" ToRole="rubro" />
         </EntityType>
-        <EntityContainer Name="BDEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="categoria" EntityType="Self.categoria" />
-        </EntityContainer>
-      </Schema>
+        <EntityType Name="direccion">
+          <Key>
+            <PropertyRef Name="DireccionId" />
+          </Key>
+          <Property Name="DireccionId" Type="Int32" Nullable="false" />
+          <Property Name="Denominacion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Referencia" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PersonaId" Type="Int32" />
+          <NavigationProperty Name="persona" Relationship="BDModel.fkPersonaDireccion" FromRole="direccion" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="inventario">
+          <Key>
+            <PropertyRef Name="AlmacenId" />
+            <PropertyRef Name="ArticuloId" />
+          </Key>
+          <Property Name="AlmacenId" Type="Int32" Nullable="false" />
+          <Property Name="ArticuloId" Type="Int32" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="Ubicacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="almacen" Relationship="BDModel.fkInventarioAlmacen" FromRole="inventario" ToRole="almacen" />
+          <NavigationProperty Name="articulo" Relationship="BDModel.fkInventarioArticulo" FromRole="inventario" ToRole="articulo" />
+        </EntityType>
+        <EntityType Name="local">
+          <Key>
+            <PropertyRef Name="LocalId" />
+          </Key>
+          <Property Name="LocalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="almacen" Relationship="BDModel.fkAlmacenLocal" FromRole="local" ToRole="almacen" />
+        </EntityType>
+        <EntityType Name="marca">
+          <Key>
+            <PropertyRef Name="MarcaId" />
+          </Key>
+          <Property Name="MarcaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="articulo" Relationship="BDModel.fkArticuloMarca" FromRole="marca" ToRole="articulo" />
+        </EntityType>
+        <EntityType Name="movimiento">
+          <Key>
+            <PropertyRef Name="MovimientoId" />
+          </Key>
+          <Property Name="MovimientoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlmacenId" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="Operacion" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="PersonaId" Type="Int32" Nullable="false" />
+          <Property Name="Fecha" Type="DateTime" Nullable="false" />
+          <Property Name="SubTotal" Type="Decimal" Nullable="false" />
+          <Property Name="IGV" Type="Decimal" Nullable="false" />
+          <Property Name="Ajuste" Type="Decimal" Nullable="false" />
+          <Property Name="Total" Type="Decimal" Nullable="false" />
+          <Property Name="Glosa" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Documento" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="almacen" Relationship="BDModel.fkMovimientoAlmacen" FromRole="movimiento" ToRole="almacen" />
+          <NavigationProperty Name="movimientodet" Relationship="BDModel.fkMovDetMov" FromRole="movimiento" ToRole="movimientodet" />
+          <NavigationProperty Name="persona" Relationship="BDModel.fkPersonaId" FromRole="movimiento" ToRole="persona" />
+        </EntityType>
+        <EntityType Name="movimientodet">
+          <Key>
+            <PropertyRef Name="MovimientoDetId" />
+          </Key>
+          <Property Name="MovimientoDetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MovimientoId" Type="Int32" />
+          <Property Name="ArticuloId" Type="Int32" />
+          <Property Name="Cantidad" Type="Int32" />
+          <Property Name="Precio" Type="Decimal" />
+          <Property Name="Importe" Type="Decimal" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="articulo" Relationship="BDModel.fkMovDetArticulo" FromRole="movimientodet" ToRole="articulo" />
+          <NavigationProperty Name="movimiento" Relationship="BDModel.fkMovDetMov" FromRole="movimientodet" ToRole="movimiento" />
+          <NavigationProperty Name="serie" Relationship="BDModel.fkentradaserie" FromRole="movimientodet" ToRole="serie" />
+          <NavigationProperty Name="serie1" Relationship="BDModel.fksalidaserie" FromRole="movimientodet" ToRole="serie" />
+        </EntityType>
+        <EntityType Name="persona">
+          <Key>
+            <PropertyRef Name="PersonaId" />
+          </Key>
+          <Property Name="PersonaId" Type="Int32" Nullable="false" />
+          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Paterno" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Materno" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="TipoDocumento" Type="String" Nullable="false" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="NroDocumento" Type="String" Nullable="false" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Celular" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Sexo" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="FechaNacimiento" Type="DateTime" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="direccion" Relationship="BDModel.fkPersonaDireccion" FromRole="persona" ToRole="direccion" />
+          <NavigationProperty Name="movimiento" Relationship="BDModel.fkPersonaId" FromRole="persona" ToRole="movimiento" />
+          <NavigationProperty Name="usuario" Relationship="BDModel.fkUsuarioPersona" FromRole="persona" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="rubro">
+          <Key>
+            <PropertyRef Name="RubroId" />
+          </Key>
+          <Property Name="RubroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="categoria" Relationship="BDModel.fkRubroCategoria" FromRole="rubro" ToRole="categoria" />
+        </EntityType>
+        <EntityType Name="serie">
+          <Key>
+            <PropertyRef Name="SerieId" />
+          </Key>
+          <Property Name="SerieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ArticuloId" Type="Int32" />
+          <Property Name="MovimientoDetEntId" Type="Int32" />
+          <Property Name="MovimientoDetSalId" Type="Int32" />
+          <NavigationProperty Name="articulo" Relationship="BDModel.fkArticuloSerie" FromRole="serie" ToRole="articulo" />
+          <NavigationProperty Name="movimientodet" Relationship="BDModel.fkentradaserie" FromRole="serie" ToRole="movimientodet" />
+          <NavigationProperty Name="movimientodet1" Relationship="BDModel.fksalidaserie" FromRole="serie" ToRole="movimientodet" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="UsuarioId" />
+          </Key>
+          <Property Name="UsuarioId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PersonaId" Type="Int32" Nullable="false" />
+          <Property Name="IndAdm" Type="Boolean" Nullable="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="persona" Relationship="BDModel.fkUsuarioPersona" FromRole="usuario" ToRole="persona" />
+        </EntityType>
+        <Association Name="fkAlmacenLocal">
+          <End Type="BDModel.local" Role="local" Multiplicity="1" />
+          <End Type="BDModel.almacen" Role="almacen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="local">
+              <PropertyRef Name="LocalId" />
+            </Principal>
+            <Dependent Role="almacen">
+              <PropertyRef Name="LocalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkInventarioAlmacen">
+          <End Type="BDModel.almacen" Role="almacen" Multiplicity="1" />
+          <End Type="BDModel.inventario" Role="inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="almacen">
+              <PropertyRef Name="AlmacenId" />
+            </Principal>
+            <Dependent Role="inventario">
+              <PropertyRef Name="AlmacenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkMovimientoAlmacen">
+          <End Type="BDModel.almacen" Role="almacen" Multiplicity="1" />
+          <End Type="BDModel.movimiento" Role="movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="almacen">
+              <PropertyRef Name="AlmacenId" />
+            </Principal>
+            <Dependent Role="movimiento">
+              <PropertyRef Name="AlmacenId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkArticuloCategoria">
+          <End Type="BDModel.categoria" Role="categoria" Multiplicity="1" />
+          <End Type="BDModel.articulo" Role="articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categoria">
+              <PropertyRef Name="CategoriaId" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="CategoriaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkArticuloMarca">
+          <End Type="BDModel.marca" Role="marca" Multiplicity="1" />
+          <End Type="BDModel.articulo" Role="articulo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="marca">
+              <PropertyRef Name="MarcaId" />
+            </Principal>
+            <Dependent Role="articulo">
+              <PropertyRef Name="MarcaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkArticuloSerie">
+          <End Type="BDModel.articulo" Role="articulo" Multiplicity="0..1" />
+          <End Type="BDModel.serie" Role="serie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="ArticuloId" />
+            </Principal>
+            <Dependent Role="serie">
+              <PropertyRef Name="ArticuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkInventarioArticulo">
+          <End Type="BDModel.articulo" Role="articulo" Multiplicity="1" />
+          <End Type="BDModel.inventario" Role="inventario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="ArticuloId" />
+            </Principal>
+            <Dependent Role="inventario">
+              <PropertyRef Name="ArticuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkMovDetArticulo">
+          <End Type="BDModel.articulo" Role="articulo" Multiplicity="0..1" />
+          <End Type="BDModel.movimientodet" Role="movimientodet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="articulo">
+              <PropertyRef Name="ArticuloId" />
+            </Principal>
+            <Dependent Role="movimientodet">
+              <PropertyRef Name="ArticuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkRubroCategoria">
+          <End Type="BDModel.rubro" Role="rubro" Multiplicity="0..1" />
+          <End Type="BDModel.categoria" Role="categoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rubro">
+              <PropertyRef Name="RubroId" />
+            </Principal>
+            <Dependent Role="categoria">
+              <PropertyRef Name="RubroId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkPersonaDireccion">
+          <End Type="BDModel.persona" Role="persona" Multiplicity="0..1" />
+          <End Type="BDModel.direccion" Role="direccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="PersonaId" />
+            </Principal>
+            <Dependent Role="direccion">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkMovDetMov">
+          <End Type="BDModel.movimiento" Role="movimiento" Multiplicity="0..1" />
+          <End Type="BDModel.movimientodet" Role="movimientodet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movimiento">
+              <PropertyRef Name="MovimientoId" />
+            </Principal>
+            <Dependent Role="movimientodet">
+              <PropertyRef Name="MovimientoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkPersonaId">
+          <End Type="BDModel.persona" Role="persona" Multiplicity="1" />
+          <End Type="BDModel.movimiento" Role="movimiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="PersonaId" />
+            </Principal>
+            <Dependent Role="movimiento">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkentradaserie">
+          <End Type="BDModel.movimientodet" Role="movimientodet" Multiplicity="0..1" />
+          <End Type="BDModel.serie" Role="serie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movimientodet">
+              <PropertyRef Name="MovimientoDetId" />
+            </Principal>
+            <Dependent Role="serie">
+              <PropertyRef Name="MovimientoDetEntId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fksalidaserie">
+          <End Type="BDModel.movimientodet" Role="movimientodet" Multiplicity="0..1" />
+          <End Type="BDModel.serie" Role="serie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="movimientodet">
+              <PropertyRef Name="MovimientoDetId" />
+            </Principal>
+            <Dependent Role="serie">
+              <PropertyRef Name="MovimientoDetSalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkUsuarioPersona">
+          <End Type="BDModel.persona" Role="persona" Multiplicity="1" />
+          <End Type="BDModel.usuario" Role="usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="persona">
+              <PropertyRef Name="PersonaId" />
+            </Principal>
+            <Dependent Role="usuario">
+              <PropertyRef Name="PersonaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BDModelStoreContainer" CdmEntityContainer="BDEntities">
+          <EntitySetMapping Name="almacen">
+            <EntityTypeMapping TypeName="BDModel.almacen">
+              <MappingFragment StoreEntitySet="almacen">
+                <ScalarProperty Name="LocalId" ColumnName="LocalId" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="AlmacenId" ColumnName="AlmacenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articulo">
+            <EntityTypeMapping TypeName="BDModel.articulo">
+              <MappingFragment StoreEntitySet="articulo">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="MarcaId" ColumnName="MarcaId" />
+                <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="categoria">
             <EntityTypeMapping TypeName="BDModel.categoria">
               <MappingFragment StoreEntitySet="categoria">
-                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="RubroId" ColumnName="RubroId" />
                 <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="direccion">
+            <EntityTypeMapping TypeName="BDModel.direccion">
+              <MappingFragment StoreEntitySet="direccion">
+                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+                <ScalarProperty Name="Referencia" ColumnName="Referencia" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="DireccionId" ColumnName="DireccionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inventario">
+            <EntityTypeMapping TypeName="BDModel.inventario">
+              <MappingFragment StoreEntitySet="inventario">
+                <ScalarProperty Name="Ubicacion" ColumnName="Ubicacion" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
+                <ScalarProperty Name="AlmacenId" ColumnName="AlmacenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="local">
+            <EntityTypeMapping TypeName="BDModel.local">
+              <MappingFragment StoreEntitySet="local">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="LocalId" ColumnName="LocalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="marca">
+            <EntityTypeMapping TypeName="BDModel.marca">
+              <MappingFragment StoreEntitySet="marca">
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="MarcaId" ColumnName="MarcaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movimiento">
+            <EntityTypeMapping TypeName="BDModel.movimiento">
+              <MappingFragment StoreEntitySet="movimiento">
+                <ScalarProperty Name="Documento" ColumnName="Documento" />
+                <ScalarProperty Name="Glosa" ColumnName="Glosa" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Ajuste" ColumnName="Ajuste" />
+                <ScalarProperty Name="IGV" ColumnName="IGV" />
+                <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+                <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Operacion" ColumnName="Operacion" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="AlmacenId" ColumnName="AlmacenId" />
+                <ScalarProperty Name="MovimientoId" ColumnName="MovimientoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="movimientodet">
+            <EntityTypeMapping TypeName="BDModel.movimientodet">
+              <MappingFragment StoreEntitySet="movimientodet">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Importe" ColumnName="Importe" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
+                <ScalarProperty Name="MovimientoId" ColumnName="MovimientoId" />
+                <ScalarProperty Name="MovimientoDetId" ColumnName="MovimientoDetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="persona">
+            <EntityTypeMapping TypeName="BDModel.persona">
+              <MappingFragment StoreEntitySet="persona">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Celular" ColumnName="Celular" />
+                <ScalarProperty Name="NroDocumento" ColumnName="NroDocumento" />
+                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
+                <ScalarProperty Name="Materno" ColumnName="Materno" />
+                <ScalarProperty Name="Paterno" ColumnName="Paterno" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rubro">
+            <EntityTypeMapping TypeName="BDModel.rubro">
+              <MappingFragment StoreEntitySet="rubro">
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="RubroId" ColumnName="RubroId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="serie">
+            <EntityTypeMapping TypeName="BDModel.serie">
+              <MappingFragment StoreEntitySet="serie">
+                <ScalarProperty Name="MovimientoDetSalId" ColumnName="MovimientoDetSalId" />
+                <ScalarProperty Name="MovimientoDetEntId" ColumnName="MovimientoDetEntId" />
+                <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="SerieId" ColumnName="SerieId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="BDModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IndAdm" ColumnName="IndAdm" />
+                <ScalarProperty Name="PersonaId" ColumnName="PersonaId" />
+                <ScalarProperty Name="Clave" ColumnName="Clave" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="UsuarioId" ColumnName="UsuarioId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
