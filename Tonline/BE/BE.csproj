@@ -54,6 +54,12 @@
     <Compile Include="articulo.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="articulodet.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
+    <Compile Include="caracteristica.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="categoria.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

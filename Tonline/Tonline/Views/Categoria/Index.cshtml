@@ -1,29 +1,29 @@
-﻿@using System.Web.Script.Services
+﻿@using System.Security.Policy
+@using System.Web.Script.Services
 @model IEnumerable<BE.categoria>
 
 <div ng-app="myapp">
     <div ng-controller="myctrl">
         <div class="form-horizontal">
             <h4>categoria</h4>
-            <hr/>
-            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 <label class="control-label col-md-2">Categoria</label>
                 <div class="col-md-10">
-                    <input type="text" class="form-control" ng-model="cat.Denominacion"/>
+                    <input type="text" class="form-control" ng-model="cat.Denominacion" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">Rubro</label>
                 <div class="col-md-10">
-
-                    @Html.
+                    @Html.DropDownList("cboRubro", null, htmlAttributes: new { ng_model = "cat.RubroId" })
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="button" value="Crear" class="btn btn-default" ng-click="CrearCategoria()"/>
+                    <input type="button" value="Crear" class="btn btn-default" ng-click="CrearCategoria()" />
                 </div>
             </div>
         </div>
@@ -43,23 +43,30 @@
 @section scripts{
     <script>
         var myapp = angular.module("myapp", []);
-        myapp.controller("myctrl", function($scope, $http) {
+        myapp.controller("myctrl", function ($scope, $http) {
             $scope.lista = [];
             $http.get('@Url.Action("Lista", "Categoria")').
-                success(function(data) {
+                success(function (data) {
                     $scope.lista = data;
-                }).error(function(data) {
+                }).error(function (data) {
 
                 });
-            $scope.CrearCategoria = function() {
+            $http.get('@Url.Action("CboRubro", "Categoria")').
+                success(function (data1) {
+                    $scope.RubroId = 1;
+                    $scope.cboRubro = data1;
+                }).error(function (data) {
+
+                });
+            $scope.CrearCategoria = function () {
                 $http({
-                        traditional: true,
-                        url: '@Url.Action("Create", "Categoria")',
-                        method: 'POST',
-                        data: JSON.stringify($scope.cat),
-                        dataType: 'json'
-                    })
-                    .success(function(data) {
+                    traditional: true,
+                    url: '@Url.Action("Create", "Categoria")',
+                    method: 'POST',
+                    data: JSON.stringify($scope.cat),
+                    dataType: 'json'
+                })
+                    .success(function (data) {
                         $scope.lista.push(data);
                         delete $scope.cat;
                     })

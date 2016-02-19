@@ -17,6 +17,8 @@ namespace BE
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public articulo()
         {
+            this.caracteristica = new HashSet<caracteristica>();
+            this.articulodet = new HashSet<articulodet>();
             this.serie = new HashSet<serie>();
             this.inventario = new HashSet<inventario>();
             this.movimientodet = new HashSet<movimientodet>();
@@ -28,10 +30,15 @@ namespace BE
         public string Codigo { get; set; }
         public string Denominacion { get; set; }
         public string Descripcion { get; set; }
+        public decimal Precio { get; set; }
         public string Imagen { get; set; }
         public bool Estado { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<caracteristica> caracteristica { get; set; }
         public virtual categoria categoria { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<articulodet> articulodet { get; set; }
         public virtual marca marca { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<serie> serie { get; set; }

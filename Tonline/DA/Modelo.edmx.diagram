@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8980a57e22cd4df4a0cbb60bb4201eae" Name="Diagram1">
         <EntityTypeShape EntityType="BDModel.almacen" Width="1.5" PointX="3" PointY="4.125" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.articulo" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="BDModel.categoria" Width="1.5" PointX="3" PointY="2.75" IsExpanded="false" />
         <EntityTypeShape EntityType="BDModel.direccion" Width="1.5" PointX="5.25" PointY="6.625" IsExpanded="false" />
         <EntityTypeShape EntityType="BDModel.inventario" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="false" />
@@ -21,11 +20,6 @@
         <AssociationConnector Association="BDModel.fkAlmacenLocal" />
         <AssociationConnector Association="BDModel.fkInventarioAlmacen" />
         <AssociationConnector Association="BDModel.fkMovimientoAlmacen" />
-        <AssociationConnector Association="BDModel.fkArticuloCategoria" />
-        <AssociationConnector Association="BDModel.fkArticuloMarca" />
-        <AssociationConnector Association="BDModel.fkArticuloSerie" />
-        <AssociationConnector Association="BDModel.fkInventarioArticulo" />
-        <AssociationConnector Association="BDModel.fkMovDetArticulo" />
         <AssociationConnector Association="BDModel.fkRubroCategoria" />
         <AssociationConnector Association="BDModel.fkPersonaDireccion" />
         <AssociationConnector Association="BDModel.fkMovDetMov" />
@@ -33,6 +27,16 @@
         <AssociationConnector Association="BDModel.fkentradaserie" />
         <AssociationConnector Association="BDModel.fksalidaserie" />
         <AssociationConnector Association="BDModel.fkUsuarioPersona" />
+        <EntityTypeShape EntityType="BDModel.articulo" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="BDModel.articulodet" Width="1.5" PointX="7.5" PointY="6" IsExpanded="false" />
+        <EntityTypeShape EntityType="BDModel.caracteristica" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="false" />
+        <AssociationConnector Association="BDModel.fkArticuloCaracterisitica" />
+        <AssociationConnector Association="BDModel.fkArticuloCategoria" />
+        <AssociationConnector Association="BDModel.fkArticuloDetalleArt" />
+        <AssociationConnector Association="BDModel.fkArticuloMarca" />
+        <AssociationConnector Association="BDModel.fkArticuloSerie" />
+        <AssociationConnector Association="BDModel.fkInventarioArticulo" />
+        <AssociationConnector Association="BDModel.fkMovDetArticulo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

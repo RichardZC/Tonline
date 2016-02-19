@@ -18,12 +18,16 @@ namespace Tonline.Controllers
         // GET: Categoria
         public ActionResult Index()
         {
-            //ViewBag.RubroSelect = SelectList(CategoriaBl.Listar(), "RubroId");
+            ViewBag.cboRubro = new SelectList(RubroBl.Listar(), "RubroId", "Denominacion");
             return View();
         }
         public JsonResult Lista()
         {
             return Json(CategoriaBl.Listar(), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult CboRubro()
+        {
+            return Json(RubroBl.Listar(), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Categoria/Details/5

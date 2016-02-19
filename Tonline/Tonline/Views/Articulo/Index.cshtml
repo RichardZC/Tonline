@@ -1,6 +1,6 @@
-﻿<div class="container" style="margin-top: 30px">
-    <div id="profile-page" class="section">
-        <!-- profile-page-header -->
+﻿<div class="container" style="margin-top: 30px" ng-app="app">
+    <div id="profile-page" class="section" ng-controller="ctrl">
+ 
         <div id="profile-page-header" class="card">
 
             <div class="card-content light-blue white-text">
@@ -15,76 +15,60 @@
                     </div>
                     <div class="col s12 m6">
                         <form class="contact-form">
-                            
                             <div class="row">
                                 <div class="input-field col s6">
                                     <i class="mdi-communication-vpn-key prefix"></i>
-                                    <input id="first_name" type="text">
-                                    <label for="first_name">Código</label>
+                                    <input id="txtcodigo" type="text" ng-model="articulo.Codigo">
+                                    <label for="txtcodigo">Código</label>
                                 </div>
-
-                                
                             </div>
-
                             <div class="row">
                                 <div class="input-field col s6">
-                                   
-                                    <select>
-                                        <option value="1">Laptops y Notebooks</option>
-                                        <option value="2">Discos Duros</option>
-                                        <option value="3">Desktops</option>
-                                    </select>
-                                    <label>Seleccionar Categoría</label>
+                                    @Html.DropDownList("cboCategoria",null, "-- SELECCIONE CATEGORIA --", new { ng_model = "articulo.CategoriaId" })
+                                    
                                 </div>
-
                                 <div class="input-field col s6">
+                                    @Html.DropDownList("cboMarca", null,"-- SELECCIONE MARCA --", new { ng_model = "articulo.MarcaId" })
                                    
-                                    <select>
-                                        <option value="1">HP</option>
-                                        <option value="2">Toshiba</option>
-                                        <option value="3">Dell</option>
-                                    </select>
-                                    <label>Seleccionar Marca</label>
                                 </div>
                             </div>
-
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="mdi-action-credit-card prefix"></i>
-                                    <input id="website" type="text">
-                                    <label for="website">Denominación</label>
+                                    <input id="txtdenominacion" type="text" ng-model="articulo.Denominacion">
+                                    <label for="txtdenominacion">Denominación</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="mdi-action-receipt prefix"></i>
-                                    <textarea id="message" class="materialize-textarea"></textarea>
-                                    <label for="message">Descripción</label>
+                                    <textarea id="txtdescripcion" class="materialize-textarea" ng-model="articulo.Descripcion"></textarea>
+                                    <label for="txtdescripcion">Descripción</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6 m6 l4">
                                     <i class="mdi-maps-local-grocery-store prefix"></i>
-                                    <input id="txtprecio" type="text">
-                                    <label for="txtprecio">Precio</label>
+                                    <input id="txtp" type="text" ng-model="articulo.Precio" >
+                                    <label for="txtp">Precio</label>
                                 </div>
 
                                 <div class="input-field col s6 m6 l4">
                                     <p>
-                                        <input type="checkbox" class="checkbox" id="cagree" name="cagree"/>
+                                        <input type="checkbox" class="checkbox" id="cagree" name="cagree" ng-model="articulo.Estado" />
                                         <label for="cagree">Artículo Activo</label>
                                     </p>
                                 </div>
                                 <div class="input-field col s12 m12 l4">
-                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action">
+                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action" ng-click="CrearArticulo()">
                                         Guardar
                                         <i class="mdi-content-save right"></i>
                                     </button>
                                 </div>
                             </div>
-                          
                         </form>
                     </div>
+
                     <div class="col s12 m6">
                         <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
                             <li>
@@ -170,7 +154,7 @@
                 </div>
             </div>
         </div>
-        <!--/ profile-page-header -->
+
 
 
         <div id="profile-page-content" class="row">
@@ -183,46 +167,7 @@
                         <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
                     </div>
                 </div>
-                <!-- Profile About  -->
-                <!-- Profile About Details  -->
-                <ul id="profile-page-about-details" class="collection z-depth-1">
-                    <li class="collection-item">
-                        <div class="row">
-                            <div class="col s5 grey-text darken-1"><i class="mdi-action-wallet-travel"></i> Project</div>
-                            <div class="col s7 grey-text text-darken-4 right-align">ABC Name</div>
-                        </div>
-                    </li>
-                    <li class="collection-item">
-                        <div class="row">
-                            <div class="col s5 grey-text darken-1"><i class="mdi-social-poll"></i> Skills</div>
-                            <div class="col s7 grey-text text-darken-4 right-align">HTML, CSS</div>
-                        </div>
-                    </li>
-                    <li class="collection-item">
-                        <div class="row">
-                            <div class="col s5 grey-text darken-1"><i class="mdi-social-domain"></i> Lives in</div>
-                            <div class="col s7 grey-text text-darken-4 right-align">NY, USA</div>
-                        </div>
-                    </li>
-                    <li class="collection-item">
-                        <div class="row">
-                            <div class="col s5 grey-text darken-1"><i class="mdi-social-cake"></i> Birth date</div>
-                            <div class="col s7 grey-text text-darken-4 right-align">18th June, 1991</div>
-                        </div>
-                    </li>
-                </ul>
-                <!--/ Profile About Details  -->
-                <!-- Profile About  -->
-                <div class="card amber darken-2">
-                    <div class="card-content white-text center-align">
-                        <p class="card-title"><i class="mdi-social-group-add"></i> 3685</p>
-                        <p>Followers</p>
-                    </div>
-                </div>
-                <!-- Profile About  -->
-
-
-
+                
 
             </div>
             <!-- profile-page-sidebar-->
@@ -285,7 +230,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col s12 m6 share-icons">
+                                <div class="col s12 m6 share-icons" >
                                     <a href="#"><i class="mdi-image-camera-alt"></i></a>
                                     <a href="#"><i class="mdi-action-account-circle"></i></a>
                                     <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
@@ -318,7 +263,25 @@
     </div>
 </div>
 
+@section scripts{
+    <script>
 
+        var myapp = angular.module("app", []);
+        myapp.controller("ctrl", function($scope, $http) {
+            $scope.articulo = { Estado: true };
+            $scope.CrearArticulo = function () {
 
+                $http.post('@Url.Action("Crear", "Articulo")', $scope.articulo)
+                .success(function (data) {
+                    Materialize.toast('Se guardó Correctamente', 4000);
+                    $scope.articulo = { Estado: true };
+                });
+
+                
+                return false;
+            }
+        });
+    </script>
+}
 
 

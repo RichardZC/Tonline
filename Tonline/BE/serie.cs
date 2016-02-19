@@ -20,8 +20,8 @@ namespace BE
         public Nullable<int> MovimientoDetEntId { get; set; }
         public Nullable<int> MovimientoDetSalId { get; set; }
     
-        public virtual articulo articulo { get; set; }
         public virtual movimientodet movimientodet { get; set; }
         public virtual movimientodet movimientodet1 { get; set; }
+        public virtual articulo articulo { get; set; }
     }
 }

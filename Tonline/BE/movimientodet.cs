@@ -29,11 +29,11 @@ namespace BE
         public Nullable<decimal> Importe { get; set; }
         public string Descripcion { get; set; }
     
-        public virtual articulo articulo { get; set; }
         public virtual movimiento movimiento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<serie> serie { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<serie> serie1 { get; set; }
+        public virtual articulo articulo { get; set; }
     }
 }

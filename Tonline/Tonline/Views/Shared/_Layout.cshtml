@@ -51,7 +51,7 @@
                     </ul>
                     <div class="header-search-wrapper hide-on-med-and-down">
                         <i class="mdi-action-search"></i>
-                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Buscar en la Tienda OnLine" />
+                        <input id="txtBuscarProd" type="text" name="Search" class="header-search-input z-depth-2" placeholder="Buscar en la Tienda OnLine" />
                     </div>
                     <ul class="right hide-on-med-and-down">
                         <li>
@@ -420,7 +420,15 @@
     <script type="text/javascript" src="~/js/plugins.js"></script>
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="~/js/custom-script.js"></script>
+<script>
+    $('#txtBuscarProd').keypress(function (event) {
+        if (event.which === 13) {
+            event.preventDefault();
+            window.location = "/Buscar/Productos/" + $('#txtBuscarProd').val();
+        }
+    });
 
+</script>
     @RenderSection("scripts", false)
 </body>
 

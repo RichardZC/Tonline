@@ -26,7 +26,6 @@ namespace BE
         }
     
         public virtual DbSet<almacen> almacen { get; set; }
-        public virtual DbSet<articulo> articulo { get; set; }
         public virtual DbSet<categoria> categoria { get; set; }
         public virtual DbSet<direccion> direccion { get; set; }
         public virtual DbSet<inventario> inventario { get; set; }
@@ -38,5 +37,8 @@ namespace BE
         public virtual DbSet<rubro> rubro { get; set; }
         public virtual DbSet<serie> serie { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
+        public virtual DbSet<articulo> articulo { get; set; }
+        public virtual DbSet<articulodet> articulodet { get; set; }
+        public virtual DbSet<caracteristica> caracteristica { get; set; }
     }
 }
