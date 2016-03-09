@@ -8,7 +8,6 @@ using BL;
 
 namespace Tonline.Controllers
 {
-
     public class ArticuloController : Controller
     {
         // GET: Articulo
@@ -21,10 +20,19 @@ namespace Tonline.Controllers
         }
 
         [HttpPost]
-        public JsonResult Crear(articulo a)
+        public JsonResult Mantener(articulo a)
         {
-            ArticuloBl.Crear(a);
-            return Json(a,JsonRequestBehavior.AllowGet);
+            if (a.ArticuloId == 0)
+                ArticuloBl.Crear(a);
+            else
+                ArticuloBl.Actualizar(a);
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult Buscar(string pClave)
+        {
+            return Json(ArticuloBl.Listar(x => x.Denominacion.Contains(pClave)).Take(15).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
