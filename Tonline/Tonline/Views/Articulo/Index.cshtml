@@ -1,7 +1,6 @@
-﻿
-<div class="container" style="margin-top: 30px" ng-app="app">
+﻿<div class="container" style="margin-top: 30px" ng-app="app">
     <div id="profile-page" class="section" ng-controller="ctrl">
-
+ 
         <div id="profile-page-header" class="card">
 
             <div class="card-content light-blue white-text">
@@ -20,38 +19,38 @@
                             <div class="row">
                                 <div class="input-field col s6">
                                     <i class="mdi-communication-vpn-key prefix"></i>
-                                    <input id="txtcodigo" type="text" ng-model="articulo.Codigo" placeholder="Codigo">
+                                    <input id="txtcodigo" type="text" ng-model="articulo.Codigo">
                                     <label for="txtcodigo">Código</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
                                     @Html.DropDownList("cboCategoria",null, "-- SELECCIONE CATEGORIA --", new { ng_model = "articulo.CategoriaId" })
-
+                                    
                                 </div>
                                 <div class="input-field col s6">
                                     @Html.DropDownList("cboMarca", null,"-- SELECCIONE MARCA --", new { ng_model = "articulo.MarcaId" })
-
+                                   
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="mdi-action-credit-card prefix"></i>
-                                    <input id="txtdenominacion" type="text" ng-model="articulo.Denominacion" placeholder="Ingrese Denominacion">
+                                    <input id="txtdenominacion" type="text" ng-model="articulo.Denominacion">
                                     <label for="txtdenominacion">Denominación</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="mdi-action-receipt prefix"></i>
-                                    <textarea id="txtdescripcion" class="materialize-textarea" ng-model="articulo.Descripcion" placeholder="Ingrese Detalle"></textarea>
+                                    <textarea id="txtdescripcion" class="materialize-textarea" ng-model="articulo.Descripcion"></textarea>
                                     <label for="txtdescripcion">Descripción</label>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="input-field col s6 m6 l4">
                                     <i class="mdi-maps-local-grocery-store prefix"></i>
-                                    <input id="txtp" type="text" ng-model="articulo.Precio" placeholder="0.00">
+                                    <input id="txtp" type="text" ng-model="articulo.Precio" >
                                     <label for="txtp">Precio</label>
                                 </div>
 
@@ -62,7 +61,7 @@
                                     </p>
                                 </div>
                                 <div class="input-field col s12 m12 l4">
-                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action" ng-click="Mantener()">
+                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action" ng-click="CrearArticulo()">
                                         Guardar
                                         <i class="mdi-content-save right"></i>
                                     </button>
@@ -100,24 +99,58 @@
                     </div>
                 </div>
             </div>
-            <div id="pnlbuscador" class="card-reveal">
+            <div class="card-reveal">
                 <div class="row">
                     <form class="col s11">
                         <div class="input-field">
                             <i class="mdi-action-search prefix"></i>
-                            <input id="txtbuscar" type="text" class="validate" ng-model="txtbuscar" ng-keypress="($event.which === 13)?Buscar():0" autocomplete="off">
-                            <label for="txtbuscar">Buscar Artículo</label>
+                            <input id="icon_prefix" type="text" class="validate">
+                            <label for="icon_prefix">Buscar Artículo</label>
                         </div>
                     </form>
                     <div class="col s1">
-                        <span class="card-title"><i class="mdi-navigation-close right"></i></span>
+                        <span class="card-title">  <i class="mdi-navigation-close right"></i></span>
                     </div>
                 </div>
                 <div id="email-list" class="col s10 m4 l4 card-panel z-depth-1">
                     <ul class="collection">
-                        <li class="collection-item email-unread" ng-repeat="a in articulos" onclick="CerrarPanel()" ng-click="ProcesarArticulo(a)">
-                            <span class="email-title">{{a.Denominacion}}</span>
+                        <li class="collection-item email-unread">
+                            <span class="email-title">LAPTOP HP COREI7 PAVILIUM</span>
+                            <a href="#!" class="secondary-content email-time"><span class="blue-text ultra-small">HP</span></a>
                         </li>
+                        <li class="collection-item email-unread">
+                            <span class="email-title">LAPTOP HP COREI7 PAVILIUM</span>
+                            <a href="#!" class="secondary-content email-time"><span class="blue-text ultra-small">HP</span></a>
+                        </li>
+                        <li class="collection-item email-unread">
+                            <span class="email-title">LAPTOP HP COREI7 PAVILIUM</span>
+                            <a href="#!" class="secondary-content email-time"><span class="blue-text ultra-small">HP</span></a>
+                        </li>
+                        <li class="collection-item email-unread">
+                            <span class="email-title">LAPTOP HP COREI7 PAVILIUM</span>
+                            <a href="#!" class="secondary-content email-time"><span class="blue-text ultra-small">HP</span></a>
+                        </li>
+                        <li class="collection-item email-unread">
+                            <span class="email-title">LAPTOP HP COREI7 PAVILIUM</span>
+                            <a href="#!" class="secondary-content email-time"><span class="blue-text ultra-small">HP</span></a>
+                        </li>
+                        <li class="collection-item email-unread">
+                            <span class="email-title">LAPTOP HP COREI7 PAVILIUM</span>
+                            <a href="#!" class="secondary-content email-time"><span class="blue-text ultra-small">HP</span></a>
+                        </li>
+                        <li class="collection-item email-unread">
+                            <span class="email-title">LAPTOP HP COREI7 PAVILIUM</span>
+                            <a href="#!" class="secondary-content email-time"><span class="blue-text ultra-small">HP</span></a>
+                        </li>
+                        <li class="collection-item email-unread">
+                            <span class="email-title">LAPTOP HP COREI7 PAVILIUM</span>
+                            <a href="#!" class="secondary-content email-time"><span class="blue-text ultra-small">HP</span></a>
+                        </li>
+                        <li class="collection-item email-unread">
+                            <span class="email-title">LAPTOP HP COREI7 PAVILIUM</span>
+                            <a href="#!" class="secondary-content email-time"><span class="blue-text ultra-small">HP</span></a>
+                        </li>
+                       
                     </ul>
                 </div>
             </div>
@@ -135,7 +168,7 @@
                         <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
                     </div>
                 </div>
-
+                
 
             </div>
             <!-- profile-page-sidebar-->
@@ -198,7 +231,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col s12 m6 share-icons">
+                                <div class="col s12 m6 share-icons" >
                                     <a href="#"><i class="mdi-image-camera-alt"></i></a>
                                     <a href="#"><i class="mdi-action-account-circle"></i></a>
                                     <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
@@ -233,45 +266,21 @@
 
 @section scripts{
     <script>
-        $(function () {
-
-        });
-        function CerrarPanel() {
-            $("#pnlbuscador").velocity(
-                { translateY: 0 }, {
-                    duration: 225,
-                    queue: false,
-                    easing: 'easeInOutQuad',
-                    complete: function () { $(this).css({ display: 'none' }); }
-                }
-               );
-        };
 
         var myapp = angular.module("app", []);
-
-        myapp.controller("ctrl", function ($scope, $http) {
-            $scope.articulos = [];
+        myapp.controller("ctrl", function($scope, $http) {
             $scope.articulo = { Estado: true };
-            $scope.Mantener = function () {
-                $http.post('@Url.Action("Mantener", "Articulo")', $scope.articulo)
-                .success(function (d) {
+            $scope.CrearArticulo = function () {
+
+                $http.post('@Url.Action("Crear", "Articulo")', $scope.articulo)
+                .success(function (data) {
                     Materialize.toast('Se guardó Correctamente', 4000);
                     $scope.articulo = { Estado: true };
                 });
-            }
-            $scope.Buscar = function () {
-                $http.get('@Url.Action("Buscar", "Articulo")', { params: { pClave: $scope.txtbuscar } })
-                .success(function (d) {
-                    $scope.articulos = d;
-                });
-            }
-            $scope.ProcesarArticulo = function (a) {
-                $scope.articulo = {};
-                $scope.articulo = a;
-                $("#cboCategoria").val(a.MarcaId).material_select();
-                $("#cboMarca").val(a.CategoriaId).material_select();
-            }
 
+                
+                return false;
+            }
         });
     </script>
 }

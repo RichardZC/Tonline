@@ -6,13 +6,11 @@ using System.Web.Mvc;
 
 namespace Tonline.Controllers
 {
-
-    public class BuscarController : Controller
+    public class ProductoController : Controller
     {
-        // GET: Buscar
-        public ActionResult Productos(string id = "")
+        // GET: Producto
+        public ActionResult Index()
         {
-            ViewBag.id = id;
             return View();
         }
     }

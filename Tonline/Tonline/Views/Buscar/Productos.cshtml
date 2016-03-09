@@ -15,7 +15,6 @@
     </div>
 </div>
 
-
 <div class="row" ng-controller="ctrl">
     <div class="col s6 m4 l2" ng-repeat="a in productos">
         <div class="product-card">
@@ -52,7 +51,7 @@
         myapp.controller("ctrl", function ($scope, $http, servicio) {
             $scope.servicio = servicio;
             $scope.productos = [];
-            var txt = '@ViewBag.id';            
+            var txt = '@ViewBag.id';
             $http.get('@Url.Action("BuscarProducto", "Buscar")',{ params: { pClave: txt } })
                    .success(function (d) { $scope.productos = d; }).error(function () { });
 

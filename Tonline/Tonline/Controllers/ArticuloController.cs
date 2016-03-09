@@ -21,19 +21,10 @@ namespace Tonline.Controllers
         }
 
         [HttpPost]
-        public JsonResult Mantener(articulo a)
+        public JsonResult Crear(articulo a)
         {
-            if (a.ArticuloId==0)
-                ArticuloBl.Crear(a);
-            else
-                ArticuloBl.Actualizar(a);
-            return Json(true,JsonRequestBehavior.AllowGet);
+            ArticuloBl.Crear(a);
+            return Json(a,JsonRequestBehavior.AllowGet);
         }
-       
-        public JsonResult Buscar(string pClave)
-        {
-            return Json(ArticuloBl.Listar(x => x.Denominacion.Contains(pClave)).Take(15).ToList(), JsonRequestBehavior.AllowGet);
-        }
-      
     }
 }
