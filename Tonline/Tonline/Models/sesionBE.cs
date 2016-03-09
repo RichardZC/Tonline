@@ -8,6 +8,7 @@ namespace Tonline.Models
 {
     public class sesionBE
     {
+
         public string user { get; set; }
         public string p { get; set; }
         public bool sesion { get; set; }
