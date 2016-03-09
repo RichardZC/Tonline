@@ -7,6 +7,7 @@ using BE;
 
 namespace BL
 {
+
     public class ArticuloBl : Repositorio<articulo>
     {
         public static List<Producto> ListarProducto()

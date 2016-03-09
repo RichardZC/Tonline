@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL
 {
+
     public class Producto
     {
         public int ArticuloId { get; set; }

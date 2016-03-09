@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace Tonline.Controllers
 {
+
     public class DetalleController : Controller
     {
         // GET: Detalle

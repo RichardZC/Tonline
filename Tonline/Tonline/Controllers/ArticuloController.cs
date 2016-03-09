@@ -8,6 +8,7 @@ using BL;
 
 namespace Tonline.Controllers
 {
+
     public class ArticuloController : Controller
     {
         // GET: Articulo

@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Tonline.Controllers
 {
+
     public class BuscarController : Controller
     {
         // GET: Buscar
