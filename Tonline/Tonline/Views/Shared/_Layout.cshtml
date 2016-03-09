@@ -1,7 +1,6 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="es-pe">
-
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
@@ -31,7 +30,7 @@
     <!--<link href="~/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">-->
 </head>
 
-<body>
+<body ng-app="appmestro">
     <!-- Start Page Loading -->
     <div id="loader-wrapper">
         <div id="loader"></div>
@@ -39,7 +38,6 @@
         <div class="loader-section section-right"></div>
     </div>
     <!-- End Page Loading -->
-
     <!-- START HEADER -->
     <header id="header" class="page-topbar">
         <!-- start header nav-->
@@ -61,7 +59,7 @@
                             <a href="#modal2" class="waves-effect waves-block waves-light modal-trigger"><i class="mdi-action-perm-identity left"></i>Iniciar Sesion</a>
                         </li>
                         <li>
-                            <a href="#modal5" class="waves-effect waves-block waves-light modal-trigger"><i class="mdi-action-shopping-cart"></i></a>
+                            <a href="#modal5" class="waves-effect waves-block waves-light modal-trigger mostrarcarrito"><i class="mdi-action-shopping-cart"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -69,10 +67,11 @@
         </div>
         <!-- end header nav-->
     </header>
+
     <!-- END HEADER -->
     <!-- //////////////////////////////////////////////////////////////////////////// -->
     <!-- START MAIN -->
-    <div id="main">
+    <div id="main" ng-controller="ctrlmaestro">
         <!-- START WRAPPER -->
         <div class="wrapper">
 
@@ -115,58 +114,66 @@
             </section>
             <!-- END CONTENT -->
             <!-- //////////////////////////////////////////////////////////////////////////// -->
-
             <!-- INICIAR SESION-->
-            <div id="modal2" class="modal fixed-footer" style="width:370px">
-                <div class="modal-content teal ">
+            <div id="modal2" class="modal">
 
-                    <div id="login-page" class="row">
-                        <div class="col s12 m12 l12 card-panel">
-                            <form class="login-form">
-                                <div class="row">
-                                    <div class="input-field col s12 center">
-                                        <p class="center login-form-text"><h4>INICIAR SESIÓN</h4></p>
+                <div id="preselecting-tab" class="section">
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <div class="row">
+                                <div class="col s12">
+                                    <ul class="tabs z-depth-1 cyan" style=" ">
+                                        <li class="tab col s3">
+                                            <a class="white-text waves-effect waves-light active" href="#sapien">Iniciar Sesión</a>
+                                        </li>
+                                        <li class="tab col s3">
+                                            <a class="white-text waves-effect waves-light " href="#activeone">Crear Cuenta</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col s12">
+                                    <div id="sapien" class="col s12  ">
+
+                                        <div class="row">
+                                            <div class="col s12 m6 l6">
+                                                <div class="input-field col s12">
+                                                    <i class="mdi-social-person-outline prefix"></i>
+                                                    <input id="username" type="text" ng-model="sesion.user">
+                                                    <label for="username" class="center-align">EMAIL</label>
+                                                </div>
+                                            </div>
+                                            <div class="col s12 m6 l6">
+                                                <div class="input-field col s12">
+                                                    <i class="mdi-action-lock-outline prefix"></i>
+                                                    <input id="password" type="password" ng-model="sesion.p">
+                                                    <label for="password">CONTRASEÑA</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <a href="#" class="btn waves-effect waves-light col s12 modal-action modal-close" ng-click="iniSesion()">INICIAR SESION SEGURA</a>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" style="font-size:smaller">
+                                                <div class="input-field col offset-s6 s6 offset-m6 m6 offset-l6 l6 right-align">
+                                                    <a href="#modal4" class="waves-effect waves-block waves-light modal-trigger">OLVIDÉ MI CONTRASEÑA</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div id="activeone" class="col s12  cyan lighten-4">
+
                                     </div>
                                 </div>
-                                <div class="row margin">
-                                    <div class="input-field col s12">
-                                        <i class="mdi-social-person-outline prefix"></i>
-                                        <input id="username" type="text">
-                                        <label for="username" class="center-align">USUARIO</label>
-                                    </div>
-                                </div>
-                                <div class="row margin">
-                                    <div class="input-field col s12">
-                                        <i class="mdi-action-lock-outline prefix"></i>
-                                        <input id="password" type="password">
-                                        <label for="password">CONTRASEÑA</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12 m12 l12  login-text">
-                                        <input type="checkbox" id="remember-me" />
-                                        <label for="remember-me">Recordar mi Cuenta</label>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="input-field col s12">
-                                        <a href="index.html" class="btn waves-effect waves-light col s12">INICIAR</a>
-                                    </div>
-                                </div>
-                                <div class="row" style="font-size:smaller">
-                                    <div class="input-field col s6 m6 l6">
-                                        <a href="#modal3" class="waves-effect waves-block waves-light modal-trigger">¡Registrarse Ahora!</a>
-                                    </div>
-                                    <div class="input-field col s6 m6 l6">
-                                        <a href="#modal4" class="waves-effect waves-block waves-light modal-trigger">¿Olvido su Contraseña?</a>
-                                    </div>
-                                </div>
-                                <p></p>
-                            </form>
+                            </div>
                         </div>
                     </div>
-
                 </div>
+
+
             </div>
 
 
@@ -273,90 +280,38 @@
                     <div class="row">
                         <div class="col s12 m12 l9">
                             <ul class="collection">
-                                <li class="collection-item avatar">
+
+                                <li class="collection-item avatar" ng-repeat="c in servicio.carrito">
                                     <div class="row" style="padding: 0;margin-right:0 ">
-                                        <div class="col s7 m7 l7 " >
-                                            <img src="~/images/avatar.jpg" alt="" class="circle">
-                                            <p>TABLET LEOTEC LETAB1016 Supernova S16(QUAD CORE-16GB-1GB-DUALCAM-ANDROID 5.1) 10" -NEGRO </p>
-                                            <p>Precio S/.58.36</p>
-                                            <a href="#!" class="secondary-content"><i class="mdi-content-clear font2em"></i></a>
-                                        </div>
-                                        <div class="col s5 m5 l5 ">
-                                            <div class="row">
-                                                <div class="col s12 m6 l6 valign-wrapper ">
-                                                    <label> Cant.: &nbsp;</label> <h6> 50</h6>
-                                                </div>
-                                                <div class="col s12 m6 l6 valign-wrapper ">
-                                                    <h6 style="float: right">S/99.99</h6>
-                                                </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                </li>
-                                <li class="collection-item avatar">
-                                    <div class="row">
                                         <div class="col s7 m7 l7 ">
                                             <img src="~/images/avatar.jpg" alt="" class="circle">
-                                            <p>TABLET LEOTEC LETAB1016 Supernova S16(QUAD CORE-16GB-1GB-DUALCAM-ANDROID 5.1) 10" -NEGRO </p>
-                                            <p>Precio S/.58.36</p>
-                                            <a href="#!" class="secondary-content"><i class="mdi-content-clear font2em"></i></a>
+                                            <p>{{c.Denominacion}}</p>
+                                            <p>Precio S/ {{c.Precio | number:2}}</p>
+                                            <a href="#!" class="secondary-content" ng-click="eliminar(c)"><i class="mdi-content-clear font2em"></i></a>
                                         </div>
                                         <div class="col s5 m5 l5 ">
                                             <div class="row">
                                                 <div class="col s12 m6 l6 valign-wrapper ">
-                                                    <label> Cant.: &nbsp;</label> <h6> 50</h6>
+                                                    <label> Cant.: &nbsp;</label> <h6> {{c.Cantidad}}</h6>
                                                 </div>
                                                 <div class="col s12 m6 l6 valign-wrapper ">
-                                                    <h6 style="float: right">S/99.99</h6>
+                                                    <h6 style="float: right">S/ {{c.Precio * c.Cantidad | number:2 }}</h6>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="collection-item avatar">
-                                    <div class="row">
-                                        <div class="col s7 m7 l7 ">
-                                            <img src="~/images/avatar.jpg" alt="" class="circle">
-                                            <p>TABLET LEOTEC LETAB1016 Supernova S16(QUAD CORE-16GB-1GB-DUALCAM-ANDROID 5.1) 10" -NEGRO </p>
-                                            <p>Precio S/.58.36</p>
-                                            <a href="#!" class="secondary-content"><i class="mdi-content-clear font2em"></i></a>
-                                        </div>
-                                        <div class="col s5 m5 l5 ">
-                                            <div class="row">
-                                                <div class="col s12 m6 l6 valign-wrapper ">
-                                                    <label> Cant.: &nbsp;</label> <h6> 50</h6>
-                                                </div>
-                                                <div class="col s12 m6 l6 valign-wrapper ">
-                                                    <h6 style="float: right">S/99.99</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+
                             </ul>
-                        </div> 
+                        </div>
                         <div class="col s12 m12 l3">
                             <div class="card-panel">
                                 <div class="row">
                                     <form class="col s12">
                                         <div class="row">
-                                            <div class="input-field col s12">
-                                                <i class="mdi-av-fast-forward prefix"></i>
-                                                <input id="name3" type="text" value="S/ 999.99">
-                                                <label for="first_name">Sub Total</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="input-field col s12">
-                                                <i class="mdi-maps-local-shipping prefix"></i>
-                                                <input id="name3" type="text" value="S/ 999.99">
-                                                <label for="first_name">Gastos de Envío</label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="input-field col s12 ">
                                                 <i class="mdi-maps-local-grocery-store prefix"></i>
-                                                <input id="name35" type="text" value="S/ 999.99">
+                                                <input id="name35" type="text" value="S/ {{precioTotal() | number:2}}">
                                                 <label>TOTAL</label>
                                             </div>
                                         </div>
@@ -373,13 +328,13 @@
                                     </form>
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
-                   
+
                 </div>
             </div>
 
-                    <!-- END WRAPPER -->
+            <!-- END WRAPPER -->
         </div>
     </div>
     <!-- END MAIN -->
@@ -408,9 +363,7 @@
     <!--scrollbar-->
     <script type="text/javascript" src="~/js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <!-- chartist -->
-   <!-- <script type="text/javascript" src="~/js/plugins/chartist-js/chartist.min.js"></script> -->
-
-
+    <!-- <script type="text/javascript" src="~/js/plugins/chartist-js/chartist.min.js"></script> -->
     <!-- masonry -->
     <script src="~/js/plugins/masonry.pkgd.min.js"></script>
     <!-- imagesloaded -->
@@ -420,15 +373,76 @@
     <script type="text/javascript" src="~/js/plugins.js"></script>
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="~/js/custom-script.js"></script>
-<script>
-    $('#txtBuscarProd').keypress(function (event) {
-        if (event.which === 13) {
-            event.preventDefault();
-            window.location = "/Buscar/Productos/" + $('#txtBuscarProd').val();
-        }
-    });
+    <script>
+        $('#txtBuscarProd').keypress(function (event) {
+            if (event.which === 13) {
+                event.preventDefault();
+                window.location = "/Buscar/Productos/" + $('#txtBuscarProd').val();
+            }
+        });
 
-</script>
+        var myapp = angular.module("appmestro", []);
+        myapp.factory("servicio", function () {
+            var ret = function () { }
+            ret.carrito = [];
+            ret.agregarCarrito = function (a) {
+                var itemActual;
+                for (var i = 0; i < ret.carrito.length; i++) {
+                    if (ret.carrito[i].ArticuloId == a.ArticuloId) {
+                        itemActual = ret.carrito[i];
+                    }
+                }
+
+                if (!itemActual) {
+                    ret.carrito.push(a);
+                } else {
+                    itemActual.Cantidad++;
+                }
+                var jsonStr = JSON.stringify(ret.carrito);
+                localStorage.setItem("cart", jsonStr);
+                Materialize.toast('Se agregó al bolsa de compras', 4000);
+                $(".mostrarcarrito").trigger("click");
+            }
+            return ret;
+        });
+
+        myapp.controller("ctrlmaestro", function ($scope, $http, servicio) {
+            $scope.servicio = servicio;
+
+            var cartValue = localStorage.getItem("cart");
+            if (cartValue != null) {
+                servicio.carrito = JSON.parse(cartValue);
+            }
+
+            $scope.eliminar = function (item) {
+                servicio.carrito.splice(servicio.carrito.indexOf(item), 1);
+                localStorage.setItem("cart", JSON.stringify(servicio.carrito));
+            };
+
+            $scope.precioTotal = function () {
+                var total = 0;
+                angular.forEach(servicio.carrito, function (item) {
+                    total = total + (item.Cantidad * item.Precio);
+                });
+                return total;
+            };
+
+            $scope.iniSesion = function () {
+                $http.post('@Url.Action("Autenticar", "Home")', $scope.sesion)
+                .success(function (d) {
+                    localStorage.setItem("user", d.user);
+                    sessionStorage.setItem("p", d.p);
+                    $scope.sesion.p = '';
+                    Materialize.toast('Bienvenido ' + d.user, 4000);
+                });
+            };
+            $scope.delSesion = function () {
+                localStorage.removeItem('user');
+                sessionStorage.removeItem("p");
+            };
+
+        });
+    </script>
     @RenderSection("scripts", false)
 </body>
 

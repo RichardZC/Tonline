@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="ArticuloBl.cs" />
     <Compile Include="CategoriaBL.cs" />
+    <Compile Include="Producto.cs" />
     <Compile Include="Helper\Repositorio.cs" />
     <Compile Include="MarcaBl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
