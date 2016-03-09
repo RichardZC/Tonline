@@ -295,6 +295,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\sesionBE.cs" />
     <Compile Include="Models\TonlineContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
