@@ -61,7 +61,7 @@
                                     </p>
                                 </div>
                                 <div class="input-field col s12 m12 l4">
-                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action" ng-click="Mantener()">
+                                    <button class="btn cyan waves-effect waves-light right" type="button" name="action" ng-click="Mantener()">
                                         Guardar
                                         <i class="mdi-content-save right"></i>
                                     </button>
@@ -246,7 +246,7 @@
                );
         };
 
-        var myapp = angular.module("app", []);
+        //var myapp = angular.module("app", []);
 
         myapp.controller("ctrl", function ($scope, $http) {
             $scope.articulos = [];
@@ -259,6 +259,7 @@
                 });
             }
             $scope.Buscar = function () {
+        
                 $http.get('@Url.Action("Buscar", "Articulo")', { params: { pClave: $scope.txtbuscar } })
                 .success(function (d) {
                     $scope.articulos = d;
