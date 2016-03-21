@@ -1,7 +1,7 @@
 ﻿
 <div>
     <p></p>
-    <div class="row">
+    <div class="row" ng-controller="ctrl">
         <div class="col s12 m12 l4" style="border:1px solid red">
             <img id="imgProducto" class="materialboxed" width="350" src="~/images/gallary/Lenovo.jpg" alt="sample" data-caption="LENOVO Y70-70">
             <p></p><br />
@@ -25,19 +25,17 @@
 
         <div class="col s12 m12 l8" style="border:1px solid red">
             <div class="row">
-                <div class="col s12 m12 l12" style="border:1px solid red">Laptop LENOVO Y70-70 Core i7 17''</div>
+                <div class="col s12 m12 l12" style="border:1px solid red">{{producto.Denominacion}}</div>
             </div>
             <div class="row">
                 <div class="col s12 m6 l6" style="border:1px solid red">
                     <font color="green">10 DISPONIBLES</font><p>
-                        -Procesador Intel Core i7 4210U de 1.7 GHz<br>-RAM DDR3L de 16 GB a 1600 MHz.
-                        <br>-Memoria interna de 1TB.<br>-Sistema Operativo Windows 8.1 64.<br>-Pantalla 17.3" FHD con retroiluminación WLED de 1920 x 1080.
-                        <br>-Gráficos: NVIDIA GTX 860M<br>-2 USB de 3.0/ 1 HDMI /1 RJ-45/ 1 Lector de tarjetas 4 en 1.<br>-Cámara Web de 720p HD.
-                        <br>-Conexión Bluetooth<br>-No incluye unidad óptica.</br>
+                        {{producto.Descripcion}}</p>
                 </div>
                 <div class="col s12 m6 l6" style="border:1px solid red">
-                    <s>S/. 4,999.00</s>    -20%<p><font color="red">S/. 3,999.00</font><p>Ahorra S/. 1,000.00<p>
-                    <p><a class="btn btn-large waves-effect waves-light yellow darken-4">COMPRAR AHORA</a><p><font color="navy">Entrega en 7 días hábiles</font>
+                    <s>S/. 4,999.00</s>    -20%<p><font color="red">S/. {{producto.Precio}}</font><p>Ahorra S/. 1,000.00<p>
+                    <p><a class="btn btn-large waves-effect waves-light yellow darken-4" ng-click="servicio.agregarCarrito({ArticuloId:producto.ArticuloId,Denominacion:producto.Denominacion,Precio:producto.Precio,Cantidad:1})">COMPRAR AHORA</a><p>
+                    <font color="navy">Entrega en 7 días hábiles</font>
                     <p>Compra vía Telefono:   (066) 31 8687</p>
                 </div>
             </div>
@@ -46,15 +44,27 @@
     </div>
 </div>
 
-@section javascript
+@section scripts
 {
-    <script>    
-        $(function () {
-            $('#imgProducto').click(function () {
-                var src = $(this).attr('src');
-                $('#imgProducto').attr("src", src)
-            });
+    <script>
+        myapp.controller("ctrl", function ($scope, $http, servicio) {
+            $scope.servicio = servicio;
+            $scope.producto = {};
+            
+            $http.get('@Url.Action("ObtenerArticulo", "Detalle")',{ params: { pArticuloId: @ViewBag.ArticuloId } })
+                  .success(function (d) {$scope.producto = d;}).error(function () { });
+
+            
+        
         });
-       
+
+        $(function () {
+            $(".enlacecarrito").click(function () {
+                $(".mostrarcarrito").trigger("click");
+            });
+
+        });
+
+        
     </script>
 }
