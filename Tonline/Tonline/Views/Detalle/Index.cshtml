@@ -2,19 +2,19 @@
 <div>
     <p></p>
     <div class="row" ng-controller="ctrl">
-        <div class="col s12 m12 l4" style="border:1px solid red">
+        <div class="col s12 m12 l4">
             <img id="imgProducto" class="materialboxed" width="350" src="~/images/gallary/Lenovo.jpg" alt="sample" data-caption="LENOVO Y70-70">
             <p></p><br />
             <div class="row">
-                <div class="col s12 m12 l4" style="border:1px solid red">
+                <div class="col s12 m12 l4">
                     <img class="waves-effect" width="100" src="~/images/gallary/tapa.jpg" alt="sample" data-caption="LENOVO Y70-70">
                     <p></p><br />
                 </div>
-                <div class="col s12 m12 l4" style="border:1px solid red">
+                <div class="col s12 m12 l4">
                     <img class="waves-effect" width="100" src="~/images/gallary/mouse.jpg" alt="sample" data-caption="LENOVO Y70-70">
                     <p></p><br />
                 </div>
-                <div class="col s12 m12 l4" style="border:1px solid red">
+                <div class="col s12 m12 l4">
                     <img class="waves-effect" width="100" src="~/images/gallary/teclado.jpg" alt="sample" data-caption="LENOVO Y70-70">
                     <p></p><br />
                 </div>
@@ -23,17 +23,17 @@
         </div>
 
 
-        <div class="col s12 m12 l8" style="border:1px solid red">
+        <div class="col s12 m12 l8">
             <div class="row">
-                <div class="col s12 m12 l12" style="border:1px solid red">{{producto.Denominacion}}</div>
+                <div class="col s12 m12 l12">{{producto.Denominacion}}</div>
             </div>
             <div class="row">
-                <div class="col s12 m6 l6" style="border:1px solid red">
+                <div class="col s12 m6 l6">
                     <font color="green">10 DISPONIBLES</font><p>
                         {{producto.Descripcion}}</p>
                 </div>
-                <div class="col s12 m6 l6" style="border:1px solid red">
-                    <s>S/. 4,999.00</s>    -20%<p><font color="red">S/. {{producto.Precio}}</font><p>Ahorra S/. 1,000.00<p>
+                <div class="col s12 m6 l6">
+                    <s>S/. 4,999.00</s>    -20%<p><font color="red">S/. {{producto.Precio | number:2}}</font><p>Ahorra S/. 1,000.00<p>
                     <p><a class="btn btn-large waves-effect waves-light yellow darken-4" ng-click="servicio.agregarCarrito({ArticuloId:producto.ArticuloId,Denominacion:producto.Denominacion,Precio:producto.Precio,Cantidad:1})">COMPRAR AHORA</a><p>
                     <font color="navy">Entrega en 7 días hábiles</font>
                     <p>Compra vía Telefono:   (066) 31 8687</p>
