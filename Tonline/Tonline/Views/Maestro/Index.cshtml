@@ -1,105 +1,150 @@
-﻿<div class="row" ng-controller="ctrl">
-    <div class="col s12 m12 l6">
+﻿<div class="section" ng-controller="ctrl">
 
-        <div class="card-panel">
-            <h4 class="header2">Categoria</h4>
-            <div class="row">
-                <form class="col s12" method="post">
+    <div id="basic-form" class="section">
+        <div class="row">
+            <div class="col s12 m12 l6">
+                <div class="card-panel">
+                    <h4 class="header2">
+                        Categoría
+                        <a href="#categoria-modal" class="categoria-add modal-trigger btn-floating waves-effect waves-light right" ><i class="mdi-content-add"></i></a>
+                    </h4>
                     <div class="row">
-                        <div class="input-field col s6">
-                            @Html.DropDownList("cboRubro", null, "-- SELECCIONE RUBRO --", new { ng_model = "cat.RubroId" })
-                        </div>
-                        <div class="input-field col s6">
-                            <i class="mdi-av-fast-forward prefix"></i>
-                            <input id="txtRubro" type="text" ng-model="cat.Denominacion">
-                            <label for="txtRubro">Denominación</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action" ng-click="MantenerCategoria()">
-                                Agregar
-                                <i class="mdi-content-save right"></i>
-                            </button>
-
-                        </div>
-                        <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
-                            <ul class="collection">
-                                <li class="collection-item email-unread ng-scope" ng-repeat="c in categorias">
-                                    <span>{{c.Denominacion}}</span>
-                                    <span class="secondary-content blue-text ultra-small">{{c.Rubro}}</span>
-                                </li>
-                            </ul>
-                        </div>
+                        <form class="col s12" method="post">
+                            <div class="row">
+                                <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
+                                    <ul class="collection">
+                                        <li href="#categoria-modal" class="collection-item email-unread" ng-repeat="c in categorias" ng-click="EditarCategoria(c)">
+                                            <span>{{c.Denominacion}}</span>
+                                            <span class="secondary-content blue-text ultra-small">{{c.Rubro}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
 
-        <div class="card-panel">
-            <h4 class="header2">Rubro</h4>
-            <div class="row">
-                <form class="col s12">
+            <div class="col s12 m12 l6">
+                <div class="card-panel">
+                    <h4 class="header2">
+                        Rubro
+                        <a href="#task-modal" class="task-add modal-trigger btn-floating waves-effect waves-light right"><i class="mdi-content-add"></i></a>
+                    </h4>
+
                     <div class="row">
-                        <div class="input-field col s9">
-                            <i class="mdi-av-fast-forward prefix"></i>
-                            <input id="txtRubro" type="text" ng-model="Rubro.Denominacion">
-                            <label for="txtRubro">Denominación</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action" ng-click="MantenerRubro()">
-                                Agregar
-                                <i class="mdi-content-send right"></i>
-                            </button>
-                        </div>
-                        <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
-                            <ul class="collection">
-                                <li class="collection-item email-unread" ng-repeat="r in rubros" onclick="CerrarPanel()" ng-click="Mantener(r)">
-                                    <span> {{r.Denominacion}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s9">
+                                    <i class="mdi-av-fast-forward prefix"></i>
+                                    <input id="txtRubro" type="text" ng-model="Rubro.Denominacion">
+                                    <label for="txtRubro">Denominación</label>
+                                </div>
+                                <div class="input-field col s3">
 
-                </form>
+
+                                </div>
+
+                                <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
+                                    <ul class="collection">
+                                        <li class="collection-item email-unread" ng-repeat="r in rubros" onclick="CerrarPanel()" ng-click="Mantener(r)">
+                                            <span> {{r.Denominacion}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="card-panel">
-            <h4 class="header2">Marca</h4>
-            <div class="row">
-                <form class="col s12">
+            <div class="col s12 m12 l6">
+                <div class="card-panel">
+                    <h4 class="header2">Marca</h4>
                     <div class="row">
-                        <div class="input-field col s9">
-                            <i class="mdi-av-fast-forward prefix"></i>
-                            <input id="txtMarca" type="text" ng-model="Marca.Denominacion">
-                            <label for="txtMarca">Denominación</label>
-                        </div>
-                        <div class="input-field col s3">
-                            <button class="btn cyan waves-effect waves-light right" type="submit" name="action" ng-click="MantenerMarca()">
-                                Agregar
-                                <i class="mdi-content-send right"></i>
-                            </button>
-                        </div>
-                        <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
-                            <ul class="collection">
-                                <li class="collection-item email-unread ng-scope" ng-repeat="m in marcas">
-                                    <span> {{m.Denominacion}}</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s9">
+                                    <i class="mdi-av-fast-forward prefix"></i>
+                                    <input id="txtMarca" type="text" ng-model="Marca.Denominacion">
+                                    <label for="txtMarca">Denominación</label>
+                                </div>
+                                <div class="input-field col s3">
+                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action" ng-click="MantenerMarca()">
+                                        Agregar
+                                        <i class="mdi-content-send right"></i>
+                                    </button>
+                                </div>
+                                <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
+                                    <ul class="collection">
+                                        <li class="collection-item email-unread ng-scope" ng-repeat="m in marcas" >
+                                            <span> {{m.Denominacion}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
 
-                </form>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-
+    <div id="categoria-modal" class="modal">
+        <nav class="task-modal-nav red">
+            <div class="nav-wrapper">
+                <div class="left col s12 m5 l5">
+                    <ul>
+                        <li>
+                            <a href="#!" class="todo-menu"><i class="modal-action modal-close  mdi-hardware-keyboard-backspace"></i></a>
+                        </li>
+                        <li>
+                            <a class="todo-add">Nuevo Registro</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m7 l7 hide-on-med-and-down">
+                    <ul class="right">
+                        <li>
+                            <a href="#!"><i class="modal-action modal-close mdi-content-clear"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s6">
+                            @Html.DropDownList("cboRubro", null, "-- SELECCIONE RUBRO --", new { ng_model = "cat.RubroId" })
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="todo-title" type="text" class="validate" ng-model="cat.Denominacion" placeholder="Ingrese Categoría">
+                            <label for="todo-title">Denominación</label>
+                        </div>
+                    </div>
+                    <div class="row">                        
+                        <div class="input-field col s12">
+                            <button class="btn waves-effect waves-light right modal-action modal-close" type="submit" name="action" ng-click="MantenerCategoria()">
+                                Guardar
+                                <i class="mdi-content-save right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 @section scripts{
 
     <script>
+
         myapp.controller("ctrl", function ($scope, $http) {
             $scope.rubros = [];
-            
+
             $http.get('@Url.Action("ListarRubros", "Maestro")')
                 .success(function (d) {
                     $scope.rubros = d;
@@ -134,6 +179,19 @@
                     $scope.categorias = d;
                 });
 
+
+            $scope.EditarCategoria = function (c) {
+                if (c == null) {
+                    $scope.cat = {};
+                    $("#cboRubro").val(0).material_select();
+                }
+                else { 
+                    $scope.cat = c;
+                    $("#cboRubro").val(c.RubroId).material_select();
+                    $(".categoria-add").trigger("click");
+                }
+            }
+
             $scope.MantenerCategoria = function () {
                 $http.post('@Url.Action("MantenerCategoria", "Maestro")', $scope.cat)
                 .success(function (d) {
@@ -142,15 +200,8 @@
                     Materialize.toast('Se guardó Correctamente', 4000);
                     $scope.cat = {};
                 });
-
             }
-            $scope.Mantener = function (r) {
-                $scope.categoria = {};
-                $scope.categoria = r;
-                //$("#cboDenominacion").val(r.RubroId).material_select();
-                //$("#cboRubroId").val(r.Denominacion).material_select();
 
-            }
         });
     </script>
 }
