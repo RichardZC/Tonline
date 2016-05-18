@@ -6,7 +6,7 @@
                 <div class="card-panel">
                     <h4 class="header2">
                         Categoría
-                        <a href="#categoria-modal" class="categoria-add modal-trigger btn-floating waves-effect waves-light right" ><i class="mdi-content-add"></i></a>
+                        <a href="#categoria-modal" class="categoria-add modal-trigger btn-floating waves-effect waves-light right"><i class="mdi-content-add"></i></a>
                     </h4>
                     <div class="row">
                         <form class="col s12" method="post">
@@ -77,7 +77,7 @@
                                 </div>
                                 <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
                                     <ul class="collection">
-                                        <li class="collection-item email-unread ng-scope" ng-repeat="m in marcas" >
+                                        <li class="collection-item email-unread ng-scope" ng-repeat="m in marcas">
                                             <span> {{m.Denominacion}}</span>
                                         </li>
                                     </ul>
@@ -125,7 +125,7 @@
                             <label for="todo-title">Denominación</label>
                         </div>
                     </div>
-                    <div class="row">                        
+                    <div class="row">
                         <div class="input-field col s12">
                             <button class="btn waves-effect waves-light right modal-action modal-close" type="submit" name="action" ng-click="MantenerCategoria()">
                                 Guardar
@@ -143,6 +143,7 @@
     <script>
 
         myapp.controller("ctrl", function ($scope, $http) {
+            $scope.IndEditarCat = false;
             $scope.rubros = [];
 
             $http.get('@Url.Action("ListarRubros", "Maestro")')
@@ -181,22 +182,21 @@
 
 
             $scope.EditarCategoria = function (c) {
-                if (c == null) {
-                    $scope.cat = {};
-                    $("#cboRubro").val(0).material_select();
-                }
-                else { 
-                    $scope.cat = c;
-                    $("#cboRubro").val(c.RubroId).material_select();
-                    $(".categoria-add").trigger("click");
-                }
+                $scope.IndEditarCat=true;
+                $scope.cat = c;
+                console.log($scope.cat);
+                $("#cboRubro").val(c.RubroId).material_select();
+                $(".categoria-add").trigger("click");
             }
 
             $scope.MantenerCategoria = function () {
+                
                 $http.post('@Url.Action("MantenerCategoria", "Maestro")', $scope.cat)
                 .success(function (d) {
                     d.Rubro = $("#cboRubro option:selected").text();
-                    $scope.categorias.push(d);
+                    if (!$scope.IndEditarCat) {                        
+                        $scope.categorias.push(d);
+                    }
                     Materialize.toast('Se guardó Correctamente', 4000);
                     $scope.cat = {};
                 });
