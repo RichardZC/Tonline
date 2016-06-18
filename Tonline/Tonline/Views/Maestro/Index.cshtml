@@ -29,25 +29,15 @@
                 <div class="card-panel">
                     <h4 class="header2">
                         Rubro
-                        <a href="#task-modal" class="task-add modal-trigger btn-floating waves-effect waves-light right"><i class="mdi-content-add"></i></a>
+                        <a href="#rubro-modal" class="rubro-add modal-trigger btn-floating waves-effect waves-light right"><i class="mdi-content-add"></i></a>
                     </h4>
 
                     <div class="row">
                         <form class="col s12">
                             <div class="row">
-                                <div class="input-field col s9">
-                                    <i class="mdi-av-fast-forward prefix"></i>
-                                    <input id="txtRubro" type="text" ng-model="Rubro.Denominacion">
-                                    <label for="txtRubro">Denominación</label>
-                                </div>
-                                <div class="input-field col s3">
-
-
-                                </div>
-
                                 <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
                                     <ul class="collection">
-                                        <li class="collection-item email-unread" ng-repeat="r in rubros" onclick="CerrarPanel()" ng-click="Mantener(r)">
+                                        <li class="collection-item email-unread" ng-repeat="r in rubros" ng-click="EditarRubro(r)">
                                             <span> {{r.Denominacion}}</span>
                                         </li>
                                     </ul>
@@ -60,24 +50,16 @@
             </div>
             <div class="col s12 m12 l6">
                 <div class="card-panel">
-                    <h4 class="header2">Marca</h4>
+                    <h4 class="header2">
+                        Marca
+                        <a href="#marca-modal" class="marca-add modal-trigger btn-floating waves-effect waves-light right"><i class="mdi-content-add"></i></a>
+                    </h4>
                     <div class="row">
                         <form class="col s12">
-                            <div class="row">
-                                <div class="input-field col s9">
-                                    <i class="mdi-av-fast-forward prefix"></i>
-                                    <input id="txtMarca" type="text" ng-model="Marca.Denominacion">
-                                    <label for="txtMarca">Denominación</label>
-                                </div>
-                                <div class="input-field col s3">
-                                    <button class="btn cyan waves-effect waves-light right" type="submit" name="action" ng-click="MantenerMarca()">
-                                        Agregar
-                                        <i class="mdi-content-send right"></i>
-                                    </button>
-                                </div>
+                            <div class="row"> 
                                 <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
                                     <ul class="collection">
-                                        <li class="collection-item email-unread ng-scope" ng-repeat="m in marcas">
+                                        <li class="collection-item email-unread " ng-repeat="m in marcas" ng-click="EditarMarca(m)">
                                             <span> {{m.Denominacion}}</span>
                                         </li>
                                     </ul>
@@ -137,13 +119,104 @@
             </div>
         </div>
     </div>
+
+    <div id="rubro-modal" class="modal">
+        <nav class="task-modal-nav red">
+            <div class="nav-wrapper">
+                <div class="left col s12 m5 l5">
+                    <ul>
+                        <li>
+                            <a href="#!" class="todo-menu"><i class="modal-action modal-close  mdi-hardware-keyboard-backspace"></i></a>
+                        </li>
+                        <li>
+                            <a class="todo-add">Nuevo Registro</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m7 l7 hide-on-med-and-down">
+                    <ul class="right">
+                        <li>
+                            <a href="#!"><i class="modal-action modal-close mdi-content-clear"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="todo-title" type="text" class="validate" ng-model="rubro.Denominacion" placeholder="Ingrese Rubro">
+                            <label for="todo-title">Denominación</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button class="btn waves-effect waves-light right modal-action modal-close" type="submit" name="action" ng-click="MantenerRubro()">
+                                Guardar
+                                <i class="mdi-content-save right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="marca-modal" class="modal">
+        <nav class="task-modal-nav red">
+            <div class="nav-wrapper">
+                <div class="left col s12 m5 l5">
+                    <ul>
+                        <li>
+                            <a href="#!" class="todo-menu"><i class="modal-action modal-close  mdi-hardware-keyboard-backspace"></i></a>
+                        </li>
+                        <li>
+                            <a class="todo-add">Nuevo Registro</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m7 l7 hide-on-med-and-down">
+                    <ul class="right">
+                        <li>
+                            <a href="#!"><i class="modal-action modal-close mdi-content-clear"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="modal-content">
+            <div class="row">
+                <form class="col s12">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="todo-title" type="text" class="validate" ng-model="marca.Denominacion" placeholder="Ingrese Rubro">
+                            <label for="todo-title">Denominación</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <button class="btn waves-effect waves-light right modal-action modal-close" type="submit" name="action" ng-click="MantenerMarca()">
+                                Guardar
+                                <i class="mdi-content-save right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 @section scripts{
 
     <script>
 
         myapp.controller("ctrl", function ($scope, $http) {
             $scope.IndEditarCat = false;
+            $scope.IndEditarRubro = false;
             $scope.rubros = [];
 
             $http.get('@Url.Action("ListarRubros", "Maestro")')
@@ -152,11 +225,11 @@
                 });
 
             $scope.MantenerRubro = function () {
-                $http.post('@Url.Action("MantenerRubro", "Maestro")', $scope.Rubro)
+                $http.post('@Url.Action("MantenerRubro", "Maestro")', $scope.rubro)
                 .success(function (d) {
                     $scope.rubros.push(d);
                     Materialize.toast('Se guardó Correctamente', 4000);
-                    $scope.Rubro = {};
+                    $scope.rubro = {};
                 });
             }
 
@@ -165,13 +238,21 @@
                 .success(function (d) {
                     $scope.marcas = d;
                 });
-
+            $scope.EditarMarca = function (m) {
+                $scope.IndEditarMarca = true;
+                $scope.marca = m;
+                // console.log($scope.cat);
+                $(".marca-add").trigger("click");
+            }
             $scope.MantenerMarca = function () {
-                $http.post('@Url.Action("MantenerMarca", "Maestro")', $scope.Marca)
+                $http.post('@Url.Action("MantenerMarca", "Maestro")', $scope.marca)
                 .success(function (d) {
-                    $scope.marcas.push(d);
+                    //d.Rubro = $("#cboRubro option:selected").text();
+                    if (!$scope.IndEditarMarca) {
+                        $scope.marcas.push(d);
+                    }
                     Materialize.toast('Se guardó Correctamente', 4000);
-                    $scope.Marca = {};
+                    $scope.marca = {};
                 });
             }
             $scope.Mantenercategorias = [];
@@ -184,21 +265,37 @@
             $scope.EditarCategoria = function (c) {
                 $scope.IndEditarCat=true;
                 $scope.cat = c;
-                console.log($scope.cat);
+               // console.log($scope.cat);
                 $("#cboRubro").val(c.RubroId).material_select();
                 $(".categoria-add").trigger("click");
             }
 
             $scope.MantenerCategoria = function () {
-                
                 $http.post('@Url.Action("MantenerCategoria", "Maestro")', $scope.cat)
                 .success(function (d) {
                     d.Rubro = $("#cboRubro option:selected").text();
-                    if (!$scope.IndEditarCat) {                        
+                    if (!$scope.IndEditarCat) {
                         $scope.categorias.push(d);
                     }
                     Materialize.toast('Se guardó Correctamente', 4000);
                     $scope.cat = {};
+                });
+            }
+            $scope.EditarRubro = function (c) {
+                $scope.IndEditarRubro = true;
+                $scope.rubro = c;
+               // console.log($scope.cat);
+                $(".rubro-add").trigger("click");
+            }
+            $scope.MantenerRubro = function () {
+                $http.post('@Url.Action("MantenerRubro", "Maestro")', $scope.rubro)
+                .success(function (d) {
+                    //d.Rubro = $("#cboRubro option:selected").text();
+                    if (!$scope.IndEditarRubro) {
+                        $scope.rubros.push(d);
+                    }
+                    Materialize.toast('Se guardó Correctamente', 4000);
+                    $scope.rubro = {};
                 });
             }
 
