@@ -16,7 +16,7 @@
     <RootNamespace>Tonline</RootNamespace>
     <AssemblyName>Tonline</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -354,7 +354,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3493</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:3493/</IISUrl>
+          <IISUrl>http://localhost/Tonline</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

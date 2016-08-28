@@ -34,11 +34,11 @@ namespace BE
         public virtual DbSet<movimiento> movimiento { get; set; }
         public virtual DbSet<movimientodet> movimientodet { get; set; }
         public virtual DbSet<persona> persona { get; set; }
-        public virtual DbSet<rubro> rubro { get; set; }
         public virtual DbSet<serie> serie { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
-        public virtual DbSet<articulo> articulo { get; set; }
         public virtual DbSet<articulodet> articulodet { get; set; }
         public virtual DbSet<caracteristica> caracteristica { get; set; }
+        public virtual DbSet<articulo> articulo { get; set; }
+        public virtual DbSet<rubro> rubro { get; set; }
     }
 }

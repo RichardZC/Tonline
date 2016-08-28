@@ -28,6 +28,8 @@
     <link href="~/js/plugins/prism/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="~/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!--<link href="~/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">-->
+    <!--dropify-->
+    <link href="js/plugins/dropify/css/dropify.min.css" type="text/css" rel="stylesheet" media="screen,projection">
 </head>
 
 <body ng-app="appmestro">
@@ -368,19 +370,24 @@
     <script src="~/js/plugins/masonry.pkgd.min.js"></script>
     <!-- imagesloaded -->
     <script src="~/js/plugins/imagesloaded.pkgd.min.js"></script>
-    
+    <!-- dropify -->
+    <script type="text/javascript" src="js/plugins/dropify/js/dropify.min.js"></script>
     <!--plugins.js - Some Specific JS codes for Plugin Settings-->
     <script type="text/javascript" src="~/js/plugins.js"></script>
     <!--custom-script.js - Add your own theme custom JS-->
     <script type="text/javascript" src="~/js/custom-script.js"></script>
     <script>
-        $('#txtBuscarProd').keypress(function (event) {
-            if (event.which === 13) {
-                event.preventDefault();
-                window.location = "/Buscar/Productos/" + $('#txtBuscarProd').val();
-            }
-        });
+        $(document).ready(function () {
+            $('.dropify').dropify();
 
+            $('#txtBuscarProd').keypress(function (event) {
+                if (event.which === 13) {
+                    event.preventDefault();
+                    window.location = "/Buscar/Productos/" + $('#txtBuscarProd').val();
+                }
+
+            });
+        });
         var myapp = angular.module("appmestro", []);
         myapp.factory("servicio", function () {
             var ret = function () { }
