@@ -34,5 +34,19 @@ namespace Tonline.Controllers
             return Json(ArticuloBl.Listar(x => x.Denominacion.Contains(pClave)).Take(15).ToList(), JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        public JsonResult MantenerCaracteristica(caracteristica m)
+        {
+            if (m.CaracteristicaId == 0)
+                CaracteristicaBl.Crear(m);
+            else
+                CaracteristicaBl.Actualizar(m);
+            return Json(m, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult ListarCaracteristica(int  ArticuloId)
+        {
+            return Json(CaracteristicaBl.Listar( x=>x.ArticuloId== ArticuloId), JsonRequestBehavior.AllowGet);
+        }
     }
 }

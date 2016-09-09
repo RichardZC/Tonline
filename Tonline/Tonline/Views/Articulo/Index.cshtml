@@ -25,11 +25,11 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
-                                    @Html.DropDownList("cboCategoria",null, "-- SELECCIONE CATEGORIA --", new { ng_model = "articulo.CategoriaId" })
+                                    @Html.DropDownList("cboCategoria", null, "-- SELECCIONE CATEGORIA --", new { ng_model = "articulo.CategoriaId" })
 
                                 </div>
                                 <div class="input-field col s6">
-                                    @Html.DropDownList("cboMarca", null,"-- SELECCIONE MARCA --", new { ng_model = "articulo.MarcaId" })
+                                    @Html.DropDownList("cboMarca", null, "-- SELECCIONE MARCA --", new { ng_model = "articulo.MarcaId" })
 
                                 </div>
                             </div>
@@ -43,8 +43,15 @@
                             <div class="row">
                                 <div class="input-field col s12">
                                     <i class="mdi-action-receipt prefix"></i>
-                                    <textarea id="txtdescripcion" class="materialize-textarea" ng-model="articulo.Descripcion" placeholder="Ingrese Detalle"></textarea>
+                                    <textarea id="txtdescripcion" class="materialize-textarea" ng-model="articulo.Descripcion" placeholder="Ingrese Descripción"></textarea>
                                     <label for="txtdescripcion">Descripción</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="mdi-action-receipt prefix"></i>
+                                    <textarea id="txtDetalle" class="materialize-textarea" ng-model="articulo.Detalle" placeholder="Ingrese Detalle"></textarea>
+                                    <label for="txtDetalle">Detalle</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -69,118 +76,29 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col s12 m6">
-                        <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
-                            <li>
-                                <div class="collapsible-header"><i class="mdi-communication-live-help"></i> Caracteristicas</div>
-
-                                <div class="row">
-
-                                    <div class="input-field col s12">
-                                        <div class="col s12 m8 l12">
-                                            <div class="row">
-                                                <form class="col s12">
-                                                    <div class="row">
-                                                        <div class="input-field col s12">
-                                                            <input type="text" class="form-control" placeholder="Detalle Articulo" name="txtdetart" ng-model="articulo.detalle" required>
-                                                            <label for="txtdetart">Detalle Articulo</label>
-                                                        </div>                                                        
-                                                    </div>
-
-
-                                                  
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-
-                            <li>
-                                <div class="collapsible-header"><i class="mdi-editor-insert-emoticon"></i> CARACT</div>
-                                <div class="collapsible-body" style="">
+                    <div class="col s12 m12 l6" ng-hide="articulo.ArticuloId==null">
+                        <div class="card-panel">
+                            <h4 class="header2">
+                                Carateristica
+                                <a href="#caracteristica-modal" class="caracteristica-add modal-trigger btn-floating waves-effect waves-light right"><i class="mdi-content-add"></i></a>
+                            </h4>
+                            <div class="row">
+                                <form class="col s12">
                                     <div class="row">
-
-                                        <div class="input-field col s12">
-                                            kk
+                                        <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
+                                            <ul class="collection">
+                                                <li class="collection-item email-unread " ng-repeat="m in caracteristicas" ng-click="EditarCaracteristica(m)">
+                                                    <span> {{m.Denominacion}}</span>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                </div>
-                            </li>
-                        </ul>
+
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col s12 m6">
-                        <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
-                            <li>
-                                <div class="collapsible-header"><i class="mdi-communication-live-help"></i> Caracteristicas</div>
 
-                                <div class="row">
-
-                                    <div class="input-field col s12">
-                                        <div class="col s12 m8 l12">
-                                            <div class="row">
-                                                <form class="col s12">
-                                                    <div class="row">
-                                                        <div class="input-field col s6">
-
-                                                            <input type="text" class="form-control" placeholder="name" name="name" ng-model="articulo.name" required>
-                                                            <label for="first_name">First Name</label>
-                                                        </div>
-                                                        <div class="input-field col s6">
-                                                            
-                                                            <input type="text" class="form-control" placeholder="last name" name="lastname" ng-model="articulo.lastname" required>
-                                                            <label for="last_name">Last Name</label>
-                                                        </div>
-                                                    </div>
-
-                                                   
-                                                        <div class="row">
-                                                            <div class="input-field col s6">
-                                                                
-                                                                <input type="text" class="form-control" placeholder="first_name" name="firstname" ng-model="articulo.firstname" required>
-                                                                <label for="first_name">First Name</label>
-                                                            </div>
-                                                            <div class="input-field col s6">
-                                                                
-                                                                <input type="text" class="form-control" placeholder="last_name" name="lastname1" ng-model="articulo.lastname1" required>
-                                                                <label for="last_name">Last Name</label>
-                                                            </div>
-                                                        </div>
-                                                   
-                                                    <div class="row">
-                                                       
-                                                            <div class="input-field col s6">
-                                                               
-                                                                <input type="text" class="form-control" placeholder="first_name" name="firstname2" ng-model="articulo.firstname2" required>
-                                                                <label for="first_name">First Name</label>
-                                                            </div>
-                                                            <div class="input-field col s6">
-                                                               
-                                                                <input type="text" class="form-control" placeholder="last_name" name="lastname3" ng-model="articulo.lastname3" required>
-                                                                <label for="last_name">Last Name</label>
-                                                            </div>
-                                                        </div>
-                                                    
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                           
-                            <li>
-                                <div class="collapsible-header"><i class="mdi-editor-insert-emoticon"></i> CARACT</div>
-                                <div class="collapsible-body" style="">
-                                    <div class="row">
-
-                                        <div class="input-field col s12">    
-                                            kk
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div id="pnlbuscador" class="card-reveal">
@@ -205,15 +123,60 @@
                 </div>
             </div>
         </div>
-              
+
+
+
+
+        <div id="caracteristica-modal" class="modal">
+            <nav class="task-modal-nav red">
+                <div class="nav-wrapper">
+                    <div class="left col s12 m5 l5">
+                        <ul>
+                            <li>
+                                <a href="#!" class="todo-menu"><i class="modal-action modal-close  mdi-hardware-keyboard-backspace"></i></a>
+                            </li>
+                            <li>
+                                <a class="todo-add">Nuevo Registro</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col s12 m7 l7 hide-on-med-and-down">
+                        <ul class="right">
+                            <li>
+                                <a href="#!"><i class="modal-action modal-close mdi-content-clear"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="modal-content">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="todo-title" type="text" class="validate" ng-model="caracteristica.Denominacion" placeholder="Ingrese Caracteristica">
+                                <label for="todo-title">Denominación</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button class="btn waves-effect waves-light right modal-action modal-close" type="submit" name="action" ng-click="MantenerCaracteristica()">
+                                    Guardar
+                                    <i class="mdi-content-save right"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
     </div>
 </div>
 
-
 <!--Striped Table-->
 
-   
+
 
 
 @section scripts{
@@ -245,7 +208,7 @@
                 });
             }
             $scope.Buscar = function () {
-        
+
                 $http.get('@Url.Action("Buscar", "Articulo")', { params: { pClave: $scope.txtbuscar } })
                 .success(function (d) {
                     $scope.articulos = d;
@@ -256,11 +219,38 @@
                 $scope.articulo = a;
                 $("#cboCategoria").val(a.CategoriaId).material_select();
                 $("#cboMarca").val(a.MarcaId).material_select();
+
+                $http.get('@Url.Action("ListarCaracteristica", "Articulo")' + "?ArticuloId=" + a.ArticuloId)
+                                .success(function (d) {
+                                    $scope.caracteristicas = d;
+                                });
+            }
+
+            $scope.caracteristicas = [];
+
+
+            $scope.EditarCaracteristica = function (m) {
+                $scope.IndEditarCaracterisitica = true;
+                $scope.caracteristica = m;
+                // console.log($scope.cat);
+                $(".caracteristica-add").trigger("click");
+            }
+            $scope.MantenerCaracteristica = function () {
+                //console.log($scope.articulo);
+                $scope.caracteristica.ArticuloId = $scope.articulo.ArticuloId;
+                $http.post('@Url.Action("MantenerCaracteristica", "Articulo")', $scope.caracteristica)
+                .success(function (d) {
+                    if (!$scope.IndEditarCaracteristica) {
+                        $scope.caracteristicas.push(d);
+                    }
+                    Materialize.toast('Se guardó Correctamente', 4000);
+                    $scope.caracteristica = {};
+                });
             }
 
         });
 
-        
+
 
     </script>
 }
