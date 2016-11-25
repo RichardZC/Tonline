@@ -156,16 +156,24 @@
                             <div class="input-field col s12">
                                 <input id="todo-title" type="text" class="validate" ng-model="caracteristica.Denominacion" placeholder="Ingrese Caracteristica">
                                 <label for="todo-title">Denominación</label>
+
                             </div>
                         </div>
                         <div class="row">
                             <div class="input-field col s12">
+                                <button class="btn waves-effect waves-light left grey modal-action modal-close" type="submit" name="action" ng-click="EliminarCaracteristica()">
+                                    Eliminar
+                                    <i class="mdi-content-clear right"></i>
+                                </button>
+                            
                                 <button class="btn waves-effect waves-light right modal-action modal-close" type="submit" name="action" ng-click="MantenerCaracteristica()">
                                     Guardar
                                     <i class="mdi-content-save right"></i>
                                 </button>
                             </div>
+                           
                         </div>
+                        
                     </form>
                 </div>
             </div>
@@ -225,33 +233,62 @@
                                     $scope.caracteristicas = d;
                                 });
             }
+            
+            //$scope.Mantenerlimpieza = function (id) {
+            //    for(var i=0,len=$scope.caracteristicas.length;i<len;i++){
+            //        if($scope.caracteristicas [i]=== id){
+            //            $scope.caracteristicas.splice(i,1)};
+            //        break;
+            //    }
+            //    $scope.caracteristicas = '';
 
-            $scope.caracteristicas = [];
+
+            //}
+           // $scope.caracteristicas = [];
 
 
             $scope.EditarCaracteristica = function (m) {
-                $scope.IndEditarCaracterisitica = true;
+                $scope.IndEditarCaracteristica = true;
                 $scope.caracteristica = m;
-                // console.log($scope.cat);
+                
+                //alert($scope.IndEditarCaracteristica);
                 $(".caracteristica-add").trigger("click");
             }
             $scope.MantenerCaracteristica = function () {
-                //console.log($scope.articulo);
+                
                 $scope.caracteristica.ArticuloId = $scope.articulo.ArticuloId;
                 $http.post('@Url.Action("MantenerCaracteristica", "Articulo")', $scope.caracteristica)
                 .success(function (d) {
+                    //alert($scope.IndEditarCaracteristica);
                     if (!$scope.IndEditarCaracteristica) {
                         $scope.caracteristicas.push(d);
                     }
                     Materialize.toast('Se guardó Correctamente', 4000);
                     $scope.caracteristica = {};
+                    $scope.IndEditarCaracterisitica = false;
                 });
             }
 
+            $scope.EliminarCaracteristica = function () {
+                
+                $http.get('@Url.Action("EliminarCaracteristica", "Articulo")', { params: { pid: $scope.caracteristica.CaracteristicaId } })
+                .success(function (d) {
+                    
+                        for(var i=0,len=$scope.caracteristicas.length;i<len;i++){
+                            if ($scope.caracteristicas[i].CaracteristicaId === $scope.caracteristica.CaracteristicaId) {
+                                $scope.caracteristicas.splice(i, 1)
+                                break;
+                            };                            
+                        }
+                
+                    //$scope.caracteristicas.splice($scope.caracteristica.CaracteristicaId,1);
+
+                    Materialize.toast('Se Eliminó Correctamente', 4000);
+                    $scope.caracteristica = {};
+                    $scope.IndEditarCaracterisitica = false;
+                });
+            }
         });
-
-
-
     </script>
 }
 

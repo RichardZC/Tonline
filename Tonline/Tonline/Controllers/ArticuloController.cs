@@ -46,7 +46,16 @@ namespace Tonline.Controllers
 
         public JsonResult ListarCaracteristica(int  ArticuloId)
         {
-            return Json(CaracteristicaBl.Listar( x=>x.ArticuloId== ArticuloId), JsonRequestBehavior.AllowGet);
+            return Json(CaracteristicaBl.Listar(), JsonRequestBehavior.AllowGet);
+           
         }
+
+        
+        public JsonResult EliminarCaracteristica(int pid)
+        {            
+            CaracteristicaBl.Eliminar(pid);           
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }
