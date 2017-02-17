@@ -86,14 +86,14 @@
                             <div class="col col s8 m8 l8">
                                 <ul id="profile-dropdown" class="dropdown-content">
                                     <li>
-                                        <a href="#"><i class="mdi-action-face-unlock"></i> Profile</a>
+                                        <a href="#"><i class="mdi-action-face-unlock"></i> Perfil</a>
                                     </li>
                                     <li>
-                                        <a href="#"><i class="mdi-hardware-keyboard-tab"></i> Logout</a>
-                                    </li>
+                                        <a href="#"><i class="mdi-hardware-keyboard-tab"></i> Salir</a>
+                                    </li>   
                                 </ul>
-                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
-                                <p class="user-roal">Administrator</p>
+                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown"><span ng-model="sesion.Nombre" >invitado</span><i class="mdi-navigation-arrow-drop-down right"></i></a>
+                                <p class="user-roal">Administrador</p>
                             </div>
                         </div>
                     </li>
@@ -127,7 +127,7 @@
                                             <a class="white-text waves-effect waves-light active" href="#sapien">Iniciar Sesión</a>
                                         </li>
                                         <li class="tab col s3">
-                                            <a class="white-text waves-effect waves-light " href="#activeone">Crear Cuenta</a>
+                                            <a class="white-text waves-effect waves-light " href="#modal3">Crear Cuenta</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -318,10 +318,10 @@
                                         <div class="row">
                                             <div class="row">
                                                 <div class="input-field col s12">
-                                                    <button class="btn pink waves-effect waves-light right" type="submit" name="action" style="width: 100%">
+                                                    <a href='@Url.Action("Index","Comprar")' class="btn pink waves-effect waves-light right" type="submit" name="action" style="width: 100%">
                                                         PROCESAR COMPRA
                                                         <i class="mdi-content-send right"></i>
-                                                    </button>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -408,6 +408,7 @@
 
         myapp.controller("ctrlmaestro", function ($scope, $http, servicio) {
             $scope.servicio = servicio;
+            
 
             var cartValue = localStorage.getItem("cart");
             if (cartValue != null) {
@@ -430,10 +431,17 @@
             $scope.iniSesion = function () {
                 $http.post('@Url.Action("Autenticar", "Home")', $scope.sesion)
                 .success(function (d) {
-                    localStorage.setItem("user", d.user);
-                    sessionStorage.setItem("p", d.p);
-                    $scope.sesion.p = '';
-                    Materialize.toast('Bienvenido ' + d.user, 4000);
+                    if (d.sesion) {
+                        localStorage.setItem("user", d.user);
+                        sessionStorage.setItem("p", d.p);
+                        $scope.sesion.p = '';
+                        $scope.sesion.Nombre = d.Nombre;
+                        Materialize.toast('Bienvenido ' + d.user, 4000);
+                        window.location.reload();
+                    }
+                    else {
+                        Materialize.toast('Usuario o Contraseña Incorrecta. ', 4000);
+                    }
                 });
             };
             $scope.delSesion = function () {
@@ -443,6 +451,8 @@
 
         });
     </script>
+    
+
     @RenderSection("scripts", false)
 </body>
 

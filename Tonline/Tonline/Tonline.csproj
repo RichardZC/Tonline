@@ -288,6 +288,7 @@
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\BuscarController.cs" />
     <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\ComprarController.cs" />
     <Compile Include="Controllers\DetalleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MaestroController.cs" />
@@ -319,6 +320,7 @@
     <Content Include="Views\Articulo\Index.cshtml" />
     <Content Include="Views\Buscar\Productos.cshtml" />
     <Content Include="Views\Maestro\Index.cshtml" />
+    <Content Include="Views\Comprar\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

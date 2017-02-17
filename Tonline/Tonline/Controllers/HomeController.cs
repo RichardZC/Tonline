@@ -36,9 +36,13 @@ namespace Tonline.Controllers
         {
             //string login = Request.Form["login_name"].Trim();
             //string pass = Request.Form["login_pw"].Trim();
-            if (true)
+            
+            var r = UsuarioBl.Obtener(x=> x.Nombre==s.user && x.Clave==s.p,includeProperties:"persona");
+
+            if (r !=null)
             {
                 s.sesion = true;
+                s.Nombre = r.persona.Nombres + " " + r.persona.Paterno;
                 return Json(s, JsonRequestBehavior.AllowGet);
             }
             return null;

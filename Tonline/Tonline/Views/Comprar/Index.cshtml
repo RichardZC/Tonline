@@ -1,0 +1,142 @@
+﻿<div ng-controller="ctrl">
+    <p></p>
+    <div id="frmLogin" class="row">
+        <div class="col s12 m12 l12">
+            <p>Ud. no Inicio Sesión</p>
+            <a href="#modal2" class="btn-large waves-effect waves-light yellow darken-4 modal-trigger">Iniciar Sesión</a>
+        </div>
+    </div>
+
+    <div id="frmCliente" class="row">
+        <div class="col s12 m12 l5">
+            <div class="col s12 m8 l9">
+                <div class="row">
+                    <form class="form-horizontal form-checkout">
+                        <div class="control-group">
+                            <label class="control-label" for="name">Nombres<span class="red-clr bold"></span></label>
+                            <div class="controls">
+                                <input type="text" id="txtName" class="span4" value="{{persona.Nombres}}  {{persona.Paterno}} {{persona.Materno}}" />
+                            </div>
+                        </div>
+                       
+                        <div class="control-group">
+                            <label class="control-label" for="dni">DNI<span class="red-clr bold"></span></label>
+                            <div class="controls">
+                                <input type="text" id="txtDni" class="span4" ng-model="persona.NroDocumento" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="telephone">Telefono<span class="red-clr bold"></span></label>
+                            <div class="controls">
+                                <input type="tel" id="txtCelular" class="span4" ng-model="persona.Celular"  />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="email">Email<span class="red-clr bold"></span></label>
+                            <div class="controls">
+                                <input type="email" id="txtemail" class="span4" ng-model="persona.Correo" />
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="addr">Dirección<span class="red-clr bold"></span></label>
+                            <div class="controls">
+                                <input type="text" id="txtaddr" class="span4" ng-model="persona.Direccion" />
+                            </div>
+                        </div>
+                        <div class="col s12">
+                            <label for="crole">FORMA DE PAGO</label>
+                            <select class="error browser-default" id="crole" name="crole" data-error=".errorTxt6">
+                                <option value="" disabled selected>Escoga Forma de Pago</option>
+                                <option value="1">Contra Entrega</option>
+                                <option value="2">Pago en Tienda Central</option>
+                            </select>
+                            <div class="input-field">
+                                <div class="errorTxt6"></div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="frmConfirmar" class="col s12 m12 l7">
+            <table class="table table-items" style="padding: 0;margin-right:0 ">
+                <thead>
+                    <tr>
+                        <th colspan="2">Producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="c in servicio.carrito">
+                        <td class="col s12 m12 l8">-- {{c.Denominacion}}</td>
+                        <th></th>                       
+                        <td class="col s12 m4 l4 right-align">{{c.Cantidad}}</td>                        
+                        <td class="col s12 m6 l4 right-align">{{c.Precio * c.Cantidad | number:2}}</td>
+                    </tr>
+                </tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td class="stronger">Total: S/. </td>
+                    <td class="stronger"><div >{{precioTotal() | number:2}}</div></td>
+                </tr>
+            </table>
+            <hr />
+
+            <p class="right-align">
+                <a id="btnPedido" class="btn btn-primary higher bold">Confirmar Compra</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+@section scripts{
+    <script>
+        myapp.controller("ctrl", function ($scope, $http, servicio) {
+            $scope.servicio = servicio;
+            $scope.productos = [];
+
+            $("#frmLogin,#frmCliente,#frmConfirmar").hide();
+            var sesion = localStorage.getItem("user");
+            //var user = {};
+            if (sesion != null) {
+                //user = JSON.parse(sesion);
+                $("#frmCliente,#frmConfirmar").show();
+
+                $http.get('@Url.Action("ObtenerPersonaUsuario", "Maestro")', { params: { usuario: sesion } })
+                              .success(function (d) {
+                                  $scope.persona = d;
+                              });
+
+             
+            }
+            else {
+                $("#frmLogin").show();
+            }
+
+
+
+            var pedidos = JSON.stringify({ pClienteId: sesion.UsuarioId, pPedidos: servicio.carrito });
+            console.log(pedidos);
+
+            $("#btnPedido").click(function () {
+                $.ajax({
+                    type: 'post',
+                    datatype: 'json',
+                    contenttype: 'application/json; charset=utf-8',
+                    data: pedidos,
+                    success: function () {
+                        localStorage.removeItem("cart");
+                        window.location = '@Url.Action("Index","Home")';
+                    }
+                });
+            });
+
+        });
+    </script>
+
+}

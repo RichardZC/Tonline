@@ -12,5 +12,7 @@ namespace Tonline.Models
         public string user { get; set; }
         public string p { get; set; }
         public bool sesion { get; set; }
+
+        public string Nombre { get; set; }
     }
 }
