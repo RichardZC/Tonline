@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ArticuloBl.cs" />
+    <Compile Include="CaracteristicaBl.cs" />
     <Compile Include="CategoriaBL.cs" />
     <Compile Include="CategoriaRubro.cs" />
     <Compile Include="Helper\Repositorio.cs" />

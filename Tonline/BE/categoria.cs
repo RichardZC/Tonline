@@ -24,8 +24,8 @@ namespace BE
         public string Denominacion { get; set; }
         public Nullable<int> RubroId { get; set; }
     
-        public virtual rubro rubro { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<articulo> articulo { get; set; }
+        public virtual rubro rubro { get; set; }
     }
 }

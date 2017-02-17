@@ -33,6 +33,7 @@ namespace BE
         public decimal Precio { get; set; }
         public string Imagen { get; set; }
         public bool Estado { get; set; }
+        public string Detalle { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<caracteristica> caracteristica { get; set; }
