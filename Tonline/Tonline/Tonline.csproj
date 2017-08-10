@@ -16,7 +16,7 @@
     <RootNamespace>Tonline</RootNamespace>
     <AssemblyName>Tonline</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -238,6 +238,9 @@
     <Content Include="js\plugins\xcharts\xcharts-script.js" />
     <Content Include="js\plugins\xcharts\xcharts.min.css" />
     <Content Include="js\plugins\xcharts\xcharts.min.js" />
+    <Content Include="js\uploadImage\jquery-3.2.1.min.js" />
+    <Content Include="js\uploadImage\jquery.uploadPreview.js" />
+    <Content Include="js\uploadImage\jquery.uploadPreview.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
     <Content Include="Scripts\angular-route.js" />
     <Content Include="Scripts\angular-route.min.js" />
@@ -278,6 +281,7 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.form.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -295,6 +299,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\sesionBE.cs" />
     <Compile Include="Models\TonlineContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -328,6 +333,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="images\imagenes\" />
+    <Folder Include="Views\ResponseModel\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BE\BE.csproj">

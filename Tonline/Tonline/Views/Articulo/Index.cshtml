@@ -1,4 +1,6 @@
 ﻿
+
+
 <div class="container" style="margin-top: 30px" ng-app="app">
     <div id="profile-page" class="section" ng-controller="ctrl">
 
@@ -25,11 +27,11 @@
                             </div>
                             <div class="row">
                                 <div class="input-field col s6">
-                                    @Html.DropDownList("cboCategoria",null, "-- SELECCIONE CATEGORIA --", new { ng_model = "articulo.CategoriaId" })
+                                    @Html.DropDownList("cboCategoria", null, "-- SELECCIONE CATEGORIA --", new { ng_model = "articulo.CategoriaId" })
 
                                 </div>
                                 <div class="input-field col s6">
-                                    @Html.DropDownList("cboMarca", null,"-- SELECCIONE MARCA --", new { ng_model = "articulo.MarcaId" })
+                                    @Html.DropDownList("cboMarca", null, "-- SELECCIONE MARCA --", new { ng_model = "articulo.MarcaId" })
 
                                 </div>
                             </div>
@@ -45,6 +47,13 @@
                                     <i class="mdi-action-receipt prefix"></i>
                                     <textarea id="txtdescripcion" class="materialize-textarea" ng-model="articulo.Descripcion" placeholder="Ingrese Detalle"></textarea>
                                     <label for="txtdescripcion">Descripción</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <i class="mdi-action-receipt prefix"></i>
+                                    <textarea id="txtDetalle" class="materialize-textarea" ng-model="articulo.Detalle" placeholder="Ingrese Detalle"></textarea>
+                                    <label for="txtDetalle">Detalle</label>
                                 </div>
                             </div>
                             <div class="row">
@@ -69,34 +78,57 @@
                             </div>
                         </form>
                     </div>
+                    <div class="col s12 m12 l6" ng-hide="articulo.ArticuloId==null">
+                        <div class="card-panel">
+                            <h4 class="header2">
+                                Carateristica
+                                <a href="#caracteristica-modal" class="caracteristica-add modal-trigger btn-floating waves-effect waves-light right"><i class="mdi-content-add"></i></a>
+                            </h4>
+                            <div class="row">
+                                <form class="col s12">
+                                    <div class="row">
+                                        <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
+                                            <ul class="collection">
+                                                <li class="collection-item email-unread " ng-repeat="m in caracteristicas" ng-click="EditarCaracteristica(m)">
+                                                    <span> {{m.Denominacion}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <h4 class="header2">
+                                        Imagen
+                                        <div id="image-preview" style="height: 350px;width: 100%;">
+                                            <label for="image-upload" id="image-label">Choose File</label>
+                                            <input type="file" name="image" id="image-upload" style="height:100%" />
+                                        </div>
+                                        
+    
+    @*<a href="#imagen-modal" class="imagen-add modal-trigger btn-floating waves-effect waves-light right"><i class="mdi-content-add"></i></a> 
+                                        <div class="row">
+                                            <div class="form-group">
+                                                <input type="file" name="documento" accept="image/x-png, image/gif, image/jpeg" @*accept="image/*" />
+                                            </div>
+                                        *@
+                                    </h4>
+                                    <div class="row">
+                                        <form class="col s12">
+                                            <div class="row">
+                                                <div id="email-list" class="col s12 m12 l12 card-panel z-depth-1">
+                                                    <ul class="collection">
+                                                        <li class="collection-item email-unread " ng-repeat="i in imagens" ng-click="EditarImagen(i)">
+                                                            <span> {{i.Denominacion}}</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            </from>
+                                    </div>
 
-                    <div class="col s12 m6">
-                        <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
-                            <li>
-                                <div class="collapsible-header"><i class="mdi-communication-live-help"></i> FAQ</div>
-                                <div class="collapsible-body" style="">
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </p>
-                                </div>
-                            </li>
-                            <li class="active">
-                                <div class="collapsible-header active"><i class="mdi-communication-email"></i> Need Help?</div>
-                                <div class="collapsible-body" style="display: none;">
-                                    <p>We welcome your inquiries at the email address <a mailto="support@geekslabs.com">support@geekslabs.com</a>.We will get in touch with you soon.</p>
-                                    <p>As a creative studio we believe no client is too big nor too small to work with us to obtain good advantage.By combining the creativity of artists with the precision of engineers we develop custom solutions that achieve results. <a href="http://themeforest.net/user/geekslabs/portfolio" target="_blank">See our work.</a></p>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="collapsible-header"><i class="mdi-editor-insert-emoticon"></i> Testimonial</div>
-                                <div class="collapsible-body" style="">
-                                    <blockquote>Fantastic product, my sites all run super fast and the support is excellent!<br>The website you designed helped a lot! </blockquote>
-                                </div>
-                            </li>
-                        </ul>
+                                </form>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
             <div id="pnlbuscador" class="card-reveal">
@@ -124,107 +156,131 @@
 
 
 
-        <div id="profile-page-content" class="row">
-            <!-- profile-page-sidebar-->
-            <div id="profile-page-sidebar" class="col s12 m4">
-                <!-- Profile About  -->
-                <div class="card light-blue">
-                    <div class="card-content white-text">
-                        <span class="card-title">About Me!</span>
-                        <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-                    </div>
-                </div>
 
-
-            </div>
-            <!-- profile-page-sidebar-->
-            <!-- profile-page-wall -->
-            <div id="profile-page-wall" class="col s12 m8">
-                <!-- profile-page-wall-share -->
-                <div id="profile-page-wall-share" class="row">
-                    <div class="col s12">
-                        <ul class="tabs tab-profile z-depth-1 light-blue">
-
-                            <li class="tab col s3">
-                                <a class="white-text waves-effect waves-light" href="#AddPhotos"><i class="mdi-image-camera-alt"></i> Add Photos</a>
+        <div id="caracteristica-modal" class="modal">
+            <nav class="task-modal-nav red">
+                <div class="nav-wrapper">
+                    <div class="left col s12 m5 l5">
+                        <ul>
+                            <li>
+                                <a href="#!" class="todo-menu"><i class="modal-action modal-close  mdi-hardware-keyboard-backspace"></i></a>
                             </li>
-                            <li class="tab col s3">
-                                <a class="white-text waves-effect waves-light" href="#CreateAlbum"><i class="mdi-image-photo-album"></i> Create Album</a>
+                            <li>
+                                <a class="todo-add">Nuevo Registro</a>
                             </li>
                         </ul>
-                        <!-- AddPhotos -->
-                        <div id="AddPhotos" class="tab-content col s12  grey lighten-4">
-                            <div class="row">
-                                <div class="col s2">
-                                    <img src="images/avatar.jpg" alt="" class="circle responsive-img valign profile-image-post">
-                                </div>
-                                <div class="input-field col s10">
-                                    <textarea id="textarea" row="2" class="materialize-textarea"></textarea>
-                                    <label for="textarea" class="">Share your favorites photos!</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 m6 share-icons">
-                                    <a href="#"><i class="mdi-image-camera-alt"></i></a>
-                                    <a href="#"><i class="mdi-action-account-circle"></i></a>
-                                    <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
-                                    <a href="#"><i class="mdi-communication-location-on"></i></a>
-                                </div>
-                                <div class="col s12 m6 right-align">
-                                    <!-- Dropdown Trigger -->
-                                    <a class='dropdown-button btn' href='#' data-activates='profliePost2'><i class="mdi-action-language"></i> Public</a>
-
-                                    <!-- Dropdown Structure -->
-                                    <ul id='profliePost2' class='dropdown-content'>
-                                        <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
-                                        <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
-                                        <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
-                                    </ul>
-
-                                    <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- CreateAlbum -->
-                        <div id="CreateAlbum" class="tab-content col s12  grey lighten-4">
-                            <div class="row">
-                                <div class="col s2">
-                                    <img src="images/avatar.jpg" alt="" class="circle responsive-img valign profile-image-post">
-                                </div>
-                                <div class="input-field col s10">
-                                    <textarea id="textarea" row="2" class="materialize-textarea"></textarea>
-                                    <label for="textarea" class="">Create awesome album.</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 m6 share-icons">
-                                    <a href="#"><i class="mdi-image-camera-alt"></i></a>
-                                    <a href="#"><i class="mdi-action-account-circle"></i></a>
-                                    <a href="#"><i class="mdi-hardware-keyboard-alt"></i></a>
-                                    <a href="#"><i class="mdi-communication-location-on"></i></a>
-                                </div>
-                                <div class="col s12 m6 right-align">
-                                    <!-- Dropdown Trigger -->
-                                    <a class='dropdown-button btn' href='#' data-activates='profliePost3'><i class="mdi-action-language"></i> Public</a>
-
-                                    <!-- Dropdown Structure -->
-                                    <ul id='profliePost3' class='dropdown-content'>
-                                        <li><a href="#!"><i class="mdi-action-language"></i> Public</a></li>
-                                        <li><a href="#!"><i class="mdi-action-face-unlock"></i> Friends</a></li>
-                                        <li><a href="#!"><i class="mdi-action-lock-outline"></i> Only Me</a></li>
-                                    </ul>
-
-                                    <a class="waves-effect waves-light btn"><i class="mdi-maps-rate-review left"></i>Post</a>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="col s12 m7 l7 hide-on-med-and-down">
+                        <ul class="right">
+                            <li>
+                                <a href="#!"><i class="modal-action modal-close mdi-content-clear"></i></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <!--/ profile-page-wall-share -->
+            </nav>
+            <div class="modal-content">
+                <div class="row">
+                    <form class="col s12">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="todo-title" type="text" class="validate" ng-model="caracteristica.Denominacion" placeholder="Ingrese Caracteristica">
+                                <label for="todo-title">Denominación</label>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <button class="btn waves-effect waves-light left grey modal-action modal-close" type="submit" name="action" ng-click="EliminarCaracteristica()">
+                                    Eliminar
+                                    <i class="mdi-content-clear right"></i>
+                                </button>
+
+                                <button class="btn waves-effect waves-light right modal-action modal-close" type="submit" name="action" ng-click="MantenerCaracteristica()">
+                                    Guardar
+                                    <i class="mdi-content-save right"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="imagen-modal" class="modal">
+            <nav class="task-modal-nav red">
+                <div class="nav-wrapper">
+                    <div class="left col s12 m5 l5">
+                        <ul>
+                            <li>
+                                <a href="#!" class="todo-menu"><i class="modal-action modal-close  mdi-hardware-keyboard-backspace"></i></a>
+                            </li>
+                            <li>
+                                <a class="todo-add">Nuevo Registro</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col s12 m7 l7 hide-on-med-and-down">
+                        <ul class="right">
+                            <li>
+                                <a href="#!"><i class="modal-action modal-close mdi-content-clear"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="modal-content">
+                <div class="row">
+                    <div class="input-field col s6">
+
+                    </div>
+                    <from>
+
+                        <div class="col-md-6">
+                           
+                            {
+                               
+                                    <input type="hidden" name="ArticuloId"  />
+                                    <div class="row">
+                                        <div class="col-xs-10">
+                                            <div class="form-group">
+                                                <input type="file" name="documento" accept="image/x-png, image/gif, image/jpeg" @*accept="image/*"*@ />
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <button type="submit" class="btn btn-primary btn-block">Adjuntar</button>
+                                        </div>
+                                    </div>
+                            }
+                            <div id="adjuntos-cargados"></div>
+                            }
+                        </div>
+
+
+
+</div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        <button class="btn waves-effect waves-light left grey modal-action modal-close" type="submit" name="action" ng-click="EliminarImagen()">
+                            Eliminar
+                            <i class="mdi-content-clear right"></i>
+                        </button>
+
+                        <button class="btn waves-effect waves-light right modal-action modal-close" type="submit" name="action" ng-click="MantenerImagen()">
+                          Adjuntos
+                            <i class="mdi-content-save right"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+                </form>
+            </div>
 
             </div>
-            <!--/ profile-page-wall -->
-
         </div>
 
     </div>
@@ -232,6 +288,17 @@
 
 @section scripts{
     <script>
+        $(document).ready(function () {
+            $.uploadPreview({
+                input_field: "#image-upload",   // Default: .image-upload
+                preview_box: "#image-preview",  // Default: .image-preview
+                label_field: "#image-label",    // Default: .image-label
+                label_default: "Choose File",   // Default: Choose File
+                label_selected: "Change File",  // Default: Change File
+                no_label: false                 // Default: false
+            });
+        });
+
         $(function () {
 
         });
@@ -259,7 +326,7 @@
                 });
             }
             $scope.Buscar = function () {
-        
+
                 $http.get('@Url.Action("Buscar", "Articulo")', { params: { pClave: $scope.txtbuscar } })
                 .success(function (d) {
                     $scope.articulos = d;
@@ -268,12 +335,77 @@
             $scope.ProcesarArticulo = function (a) {
                 $scope.articulo = {};
                 $scope.articulo = a;
-                $("#cboCategoria").val(a.MarcaId).material_select();
-                $("#cboMarca").val(a.CategoriaId).material_select();
+                $("#cboCategoria").val(a.CategoriaId).material_select();
+                $("#cboMarca").val(a.MarcaId).material_select();
+
+                $http.get('@Url.Action("ListarCaracteristica", "Articulo")' + "?ArticuloId=" + a.ArticuloId)
+                                .success(function (d) {
+                                    $scope.caracteristicas = d;
+                                });
             }
 
+            //$scope.Mantenerlimpieza = function (id) {
+            //    for(var i=0,len=$scope.caracteristicas.length;i<len;i++){
+            //        if($scope.caracteristicas [i]=== id){
+            //            $scope.caracteristicas.splice(i,1)};
+            //        break;
+            //    }
+            //    $scope.caracteristicas = '';
+
+
+            //}
+            // $scope.caracteristicas = [];
+
+
+            $scope.EditarCaracteristica = function (m) {
+                $scope.IndEditarCaracteristica = true;
+                $scope.caracteristica = m;
+
+                //alert($scope.IndEditarCaracteristica);
+                $(".caracteristica-add").trigger("click");
+            }
+            $scope.MantenerCaracteristica = function () {
+
+                $scope.caracteristica.ArticuloId = $scope.articulo.ArticuloId;
+                $http.post('@Url.Action("MantenerCaracteristica", "Articulo")', $scope.caracteristica)
+                .success(function (d) {
+                    //alert($scope.IndEditarCaracteristica);
+                    if (!$scope.IndEditarCaracteristica) {
+                        $scope.caracteristicas.push(d);
+                    }
+                    Materialize.toast('Se guardó Correctamente', 4000);
+                    $scope.caracteristica = {};
+                    $scope.IndEditarCaracterisitica = false;
+                });
+            }
+
+            $scope.EliminarCaracteristica = function () {
+
+                $http.get('@Url.Action("EliminarCaracteristica", "Articulo")', { params: { pid: $scope.caracteristica.CaracteristicaId } })
+                .success(function (d) {
+
+                    for(var i=0,len=$scope.caracteristicas.length;i<len;i++){
+                        if ($scope.caracteristicas[i].CaracteristicaId === $scope.caracteristica.CaracteristicaId) {
+                            $scope.caracteristicas.splice(i, 1)
+                            break;
+                        };
+                    }
+
+                    //$scope.caracteristicas.splice($scope.caracteristica.CaracteristicaId,1);
+
+                    Materialize.toast('Se Eliminó Correctamente', 4000);
+                    $scope.caracteristica = {};
+                    $scope.IndEditarCaracterisitica = false;
+                });
+                return false;
+            }
+      
+
         });
+
+   
     </script>
+    
 }
 
 

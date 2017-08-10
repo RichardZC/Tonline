@@ -28,6 +28,7 @@
     <link href="~/js/plugins/prism/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="~/js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
     <!--<link href="~/js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">-->
+
 </head>
 
 <body ng-app="appmestro">
@@ -355,6 +356,12 @@
     <!-- jQuery Library -->
     <script type="text/javascript" src="~/js/plugins/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="~/js/plugins/angular.min.js"></script>
+
+    <!-- Subir y visualizar imagen -->
+    @*<script type="text/javascript" src="~/js/uploadImage/jquery-3.2.1.min.js"></script>*@
+    <script type="text/javascript" src="~/js/uploadImage/jquery.uploadPreview.js"></script>
+    <script type="text/javascript" src="~/js/uploadImage/jquery.uploadPreview.min.js"></script>
+
     <!--materialize js-->
     <script type="text/javascript" src="~/js/materialize.min.js"></script>
     <script type="text/javascript" src="~/js/plugins/angular-materialize.js"></script>
@@ -444,6 +451,7 @@
         });
     </script>
     @RenderSection("scripts", false)
+    <script src="~/Scripts/jquery.form.min.js"></script>
 </body>
 
 </html>
