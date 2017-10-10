@@ -11,7 +11,7 @@ namespace Tonline.Controllers
 {
     public class ArticuloController : Controller
     {
-        private object db;
+        //private object db;
 
         // GET: Articulo
         public ActionResult Index()

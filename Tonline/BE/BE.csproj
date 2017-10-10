@@ -66,6 +66,9 @@
     <Compile Include="direccion.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="imagen.cs">
+      <DependentUpon>Modelo.tt</DependentUpon>
+    </Compile>
     <Compile Include="inventario.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>

@@ -4,40 +4,42 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8980a57e22cd4df4a0cbb60bb4201eae" Name="Diagram1">
-        <EntityTypeShape EntityType="BDModel.almacen" Width="1.5" PointX="5.25" PointY="5.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.categoria" Width="1.5" PointX="3" PointY="3.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.direccion" Width="1.5" PointX="5.25" PointY="6.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.inventario" Width="1.5" PointX="7.5" PointY="1.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.local" Width="1.5" PointX="3" PointY="5.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.marca" Width="1.5" PointX="3" PointY="1.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.movimiento" Width="1.5" PointX="5.25" PointY="8.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.movimientodet" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.persona" Width="1.5" PointX="3" PointY="8.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.serie" Width="1.5" PointX="9.75" PointY="3.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.usuario" Width="1.5" PointX="5.25" PointY="10" IsExpanded="false" />
+      <Diagram DiagramId="8980a57e22cd4df4a0cbb60bb4201eae" Name="Diagram1" ZoomLevel="86">
+        <EntityTypeShape EntityType="BDModel.almacen" Width="1.5" PointX="8.25" PointY="3.125" />
+        <EntityTypeShape EntityType="BDModel.articulo" Width="1.5" PointX="5.25" PointY="8.125" />
+        <EntityTypeShape EntityType="BDModel.articulodet" Width="1.5" PointX="7.5" PointY="22.125" />
+        <EntityTypeShape EntityType="BDModel.caracteristica" Width="1.5" PointX="7.5" PointY="6.75" />
+        <EntityTypeShape EntityType="BDModel.categoria" Width="1.5" PointX="3" PointY="9.25" />
+        <EntityTypeShape EntityType="BDModel.direccion" Width="1.5" PointX="8.25" PointY="27.875" />
+        <EntityTypeShape EntityType="BDModel.imagen" Width="1.5" PointX="7.5" PointY="9.25" />
+        <EntityTypeShape EntityType="BDModel.inventario" Width="1.5" PointX="10.5" PointY="5.125" />
+        <EntityTypeShape EntityType="BDModel.local" Width="1.5" PointX="6" PointY="3.25" />
+        <EntityTypeShape EntityType="BDModel.marca" Width="1.5" PointX="3" PointY="6.5" />
+        <EntityTypeShape EntityType="BDModel.movimiento" Width="1.5" PointX="8.25" PointY="16.25" />
+        <EntityTypeShape EntityType="BDModel.movimientodet" Width="1.5" PointX="10.5" PointY="8.75" />
+        <EntityTypeShape EntityType="BDModel.persona" Width="1.5" PointX="6" PointY="16.375" />
+        <EntityTypeShape EntityType="BDModel.rubro" Width="1.5" PointX="0.75" PointY="9.5" />
+        <EntityTypeShape EntityType="BDModel.serie" Width="1.5" PointX="7.5" PointY="12" />
+        <EntityTypeShape EntityType="BDModel.usuario" Width="1.5" PointX="8.25" PointY="24.75" />
         <AssociationConnector Association="BDModel.fkAlmacenLocal" />
         <AssociationConnector Association="BDModel.fkInventarioAlmacen" />
         <AssociationConnector Association="BDModel.fkMovimientoAlmacen" />
+        <AssociationConnector Association="BDModel.fkArticuloCaracterisitica" />
+        <AssociationConnector Association="BDModel.fkArticuloCategoria" />
+        <AssociationConnector Association="BDModel.fkArticuloDetalleArt" />
+        <AssociationConnector Association="BDModel.fkArticuloImagenArt" />
+        <AssociationConnector Association="BDModel.fkArticuloMarca" />
+        <AssociationConnector Association="BDModel.fkArticuloSerie" />
+        <AssociationConnector Association="BDModel.fkInventarioArticulo" />
+        <AssociationConnector Association="BDModel.fkMovDetArticulo" />
+        <AssociationConnector Association="BDModel.fkRubroCategoria" />
         <AssociationConnector Association="BDModel.fkPersonaDireccion" />
         <AssociationConnector Association="BDModel.fkMovDetMov" />
         <AssociationConnector Association="BDModel.fkPersonaId" />
         <AssociationConnector Association="BDModel.fkentradaserie" />
         <AssociationConnector Association="BDModel.fksalidaserie" />
         <AssociationConnector Association="BDModel.fkUsuarioPersona" />
-        <EntityTypeShape EntityType="BDModel.articulodet" Width="1.5" PointX="7.5" PointY="6.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.caracteristica" Width="1.5" PointX="7.5" PointY="7.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.articulo" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="false" />
-        <EntityTypeShape EntityType="BDModel.rubro" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="false" />
-        <AssociationConnector Association="BDModel.fkArticuloCaracterisitica" />
-        <AssociationConnector Association="BDModel.fkArticuloCategoria" />
-        <AssociationConnector Association="BDModel.fkArticuloDetalleArt" />
-        <AssociationConnector Association="BDModel.fkArticuloMarca" />
-        <AssociationConnector Association="BDModel.fkArticuloSerie" />
-        <AssociationConnector Association="BDModel.fkInventarioArticulo" />
-        <AssociationConnector Association="BDModel.fkMovDetArticulo" />
-        <AssociationConnector Association="BDModel.fkRubroCategoria" />
-        </Diagram>
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

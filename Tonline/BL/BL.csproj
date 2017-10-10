@@ -57,6 +57,7 @@
     <Compile Include="CategoriaBL.cs" />
     <Compile Include="CategoriaRubro.cs" />
     <Compile Include="Helper\Repositorio.cs" />
+    <Compile Include="ImagenBl.cs" />
     <Compile Include="MarcaBl.cs" />
     <Compile Include="PersonaBL.cs" />
     <Compile Include="Producto.cs" />

@@ -15,24 +15,20 @@ namespace BE
 using System;
     using System.Collections.Generic;
     
-public partial class usuario
+public partial class imagen
 {
 
-    public int UsuarioId { get; set; }
+    public int imagenId { get; set; }
 
-    public string Nombre { get; set; }
+    public int ArticuloId { get; set; }
 
-    public string Clave { get; set; }
+    public string Detalle { get; set; }
 
-    public int PersonaId { get; set; }
-
-    public bool IndAdm { get; set; }
-
-    public bool Estado { get; set; }
+    public string UrlImagen { get; set; }
 
 
 
-    public virtual persona persona { get; set; }
+    public virtual articulo articulo { get; set; }
 
 }
 

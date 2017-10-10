@@ -24,6 +24,7 @@ namespace BL
                     }).ToList();
             }
         }
+        
         public static List<Producto> BuscarProducto(string clave)
         {
             using (var bd = new BDEntities())
