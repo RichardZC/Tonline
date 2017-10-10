@@ -66,7 +66,12 @@ namespace Tonline.Controllers
             return Json(CategoriaBl.ListarCategoriaRubro(), JsonRequestBehavior.AllowGet);
         }
 
-
+        public JsonResult ObtenerPersonaUsuario(string usuario)
+        {
+            var p = PersonaBL.ObtenerPersona(usuario);
+            p.usuario = null;
+            return Json(p, JsonRequestBehavior.AllowGet);
+        }
 
     }
 

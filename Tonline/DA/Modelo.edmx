@@ -26,6 +26,7 @@
           <Property Name="Precio" Type="decimal" Precision="15" Scale="2" Nullable="false" />
           <Property Name="Imagen" Type="varchar" MaxLength="255" />
           <Property Name="Estado" Type="bit" Nullable="false" />
+          <Property Name="Detalle" Type="text" />
         </EntityType>
         <EntityType Name="articulodet">
           <Key>
@@ -464,7 +465,6 @@
           <EntitySet Name="movimiento" EntityType="BDModel.movimiento" />
           <EntitySet Name="movimientodet" EntityType="BDModel.movimientodet" />
           <EntitySet Name="persona" EntityType="BDModel.persona" />
-          <EntitySet Name="rubro" EntityType="BDModel.rubro" />
           <EntitySet Name="serie" EntityType="BDModel.serie" />
           <EntitySet Name="usuario" EntityType="BDModel.usuario" />
           <AssociationSet Name="fkAlmacenLocal" Association="BDModel.fkAlmacenLocal">
@@ -478,10 +478,6 @@
           <AssociationSet Name="fkMovimientoAlmacen" Association="BDModel.fkMovimientoAlmacen">
             <End Role="almacen" EntitySet="almacen" />
             <End Role="movimiento" EntitySet="movimiento" />
-          </AssociationSet>
-          <AssociationSet Name="fkRubroCategoria" Association="BDModel.fkRubroCategoria">
-            <End Role="rubro" EntitySet="rubro" />
-            <End Role="categoria" EntitySet="categoria" />
           </AssociationSet>
           <AssociationSet Name="fkPersonaDireccion" Association="BDModel.fkPersonaDireccion">
             <End Role="persona" EntitySet="persona" />
@@ -507,9 +503,10 @@
             <End Role="persona" EntitySet="persona" />
             <End Role="usuario" EntitySet="usuario" />
           </AssociationSet>
-          <EntitySet Name="articulo" EntityType="BDModel.articulo" />
           <EntitySet Name="articulodet" EntityType="BDModel.articulodet" />
           <EntitySet Name="caracteristica" EntityType="BDModel.caracteristica" />
+          <EntitySet Name="articulo" EntityType="BDModel.articulo" />
+          <EntitySet Name="rubro" EntityType="BDModel.rubro" />
           <AssociationSet Name="fkArticuloCaracterisitica" Association="BDModel.fkArticuloCaracterisitica">
             <End Role="articulo" EntitySet="articulo" />
             <End Role="caracteristica" EntitySet="caracteristica" />
@@ -538,7 +535,11 @@
             <End Role="articulo" EntitySet="articulo" />
             <End Role="movimientodet" EntitySet="movimientodet" />
           </AssociationSet>
-        </EntityContainer>
+          <AssociationSet Name="fkRubroCategoria" Association="BDModel.fkRubroCategoria">
+            <End Role="rubro" EntitySet="rubro" />
+            <End Role="categoria" EntitySet="categoria" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="almacen">
           <Key>
             <PropertyRef Name="AlmacenId" />
@@ -557,8 +558,8 @@
           <Property Name="CategoriaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Denominacion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="RubroId" Type="Int32" />
-          <NavigationProperty Name="rubro" Relationship="BDModel.fkRubroCategoria" FromRole="categoria" ToRole="rubro" />
           <NavigationProperty Name="articulo" Relationship="BDModel.fkArticuloCategoria" FromRole="categoria" ToRole="articulo" />
+          <NavigationProperty Name="rubro" Relationship="BDModel.fkRubroCategoria" FromRole="categoria" ToRole="rubro" />
         </EntityType>
         <EntityType Name="direccion">
           <Key>
@@ -657,14 +658,6 @@
           <NavigationProperty Name="movimiento" Relationship="BDModel.fkPersonaId" FromRole="persona" ToRole="movimiento" />
           <NavigationProperty Name="usuario" Relationship="BDModel.fkUsuarioPersona" FromRole="persona" ToRole="usuario" />
         </EntityType>
-        <EntityType Name="rubro">
-          <Key>
-            <PropertyRef Name="RubroId" />
-          </Key>
-          <Property Name="RubroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="categoria" Relationship="BDModel.fkRubroCategoria" FromRole="rubro" ToRole="categoria" />
-        </EntityType>
         <EntityType Name="serie">
           <Key>
             <PropertyRef Name="SerieId" />
@@ -723,18 +716,6 @@
             </Principal>
             <Dependent Role="movimiento">
               <PropertyRef Name="AlmacenId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fkRubroCategoria">
-          <End Type="BDModel.rubro" Role="rubro" Multiplicity="0..1" />
-          <End Type="BDModel.categoria" Role="categoria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="rubro">
-              <PropertyRef Name="RubroId" />
-            </Principal>
-            <Dependent Role="categoria">
-              <PropertyRef Name="RubroId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -810,27 +791,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="articulo">
-          <Key>
-            <PropertyRef Name="ArticuloId" />
-          </Key>
-          <Property Name="ArticuloId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MarcaId" Type="Int32" Nullable="false" />
-          <Property Name="CategoriaId" Type="Int32" Nullable="false" />
-          <Property Name="Codigo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
-          <Property Name="Precio" Type="Decimal" Nullable="false" />
-          <Property Name="Imagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Estado" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="caracteristica" Relationship="BDModel.fkArticuloCaracterisitica" FromRole="articulo" ToRole="caracteristica" />
-          <NavigationProperty Name="categoria" Relationship="BDModel.fkArticuloCategoria" FromRole="articulo" ToRole="categoria" />
-          <NavigationProperty Name="articulodet" Relationship="BDModel.fkArticuloDetalleArt" FromRole="articulo" ToRole="articulodet" />
-          <NavigationProperty Name="marca" Relationship="BDModel.fkArticuloMarca" FromRole="articulo" ToRole="marca" />
-          <NavigationProperty Name="serie" Relationship="BDModel.fkArticuloSerie" FromRole="articulo" ToRole="serie" />
-          <NavigationProperty Name="inventario" Relationship="BDModel.fkInventarioArticulo" FromRole="articulo" ToRole="inventario" />
-          <NavigationProperty Name="movimientodet" Relationship="BDModel.fkMovDetArticulo" FromRole="articulo" ToRole="movimientodet" />
-        </EntityType>
         <EntityType Name="articulodet">
           <Key>
             <PropertyRef Name="ArticuloDetId" />
@@ -848,6 +808,36 @@
           <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="ArticuloId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="articulo" Relationship="BDModel.fkArticuloCaracterisitica" FromRole="caracteristica" ToRole="articulo" />
+        </EntityType>
+        <EntityType Name="articulo">
+          <Key>
+            <PropertyRef Name="ArticuloId" />
+          </Key>
+          <Property Name="ArticuloId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MarcaId" Type="Int32" Nullable="false" />
+          <Property Name="CategoriaId" Type="Int32" Nullable="false" />
+          <Property Name="Codigo" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Nullable="false" />
+          <Property Name="Imagen" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" Nullable="false" />
+          <Property Name="Detalle" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="caracteristica" Relationship="BDModel.fkArticuloCaracterisitica" FromRole="articulo" ToRole="caracteristica" />
+          <NavigationProperty Name="categoria" Relationship="BDModel.fkArticuloCategoria" FromRole="articulo" ToRole="categoria" />
+          <NavigationProperty Name="articulodet" Relationship="BDModel.fkArticuloDetalleArt" FromRole="articulo" ToRole="articulodet" />
+          <NavigationProperty Name="marca" Relationship="BDModel.fkArticuloMarca" FromRole="articulo" ToRole="marca" />
+          <NavigationProperty Name="serie" Relationship="BDModel.fkArticuloSerie" FromRole="articulo" ToRole="serie" />
+          <NavigationProperty Name="inventario" Relationship="BDModel.fkInventarioArticulo" FromRole="articulo" ToRole="inventario" />
+          <NavigationProperty Name="movimientodet" Relationship="BDModel.fkMovDetArticulo" FromRole="articulo" ToRole="movimientodet" />
+        </EntityType>
+        <EntityType Name="rubro">
+          <Key>
+            <PropertyRef Name="RubroId" />
+          </Key>
+          <Property Name="RubroId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Denominacion" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="categoria" Relationship="BDModel.fkRubroCategoria" FromRole="rubro" ToRole="categoria" />
         </EntityType>
         <Association Name="fkArticuloCaracterisitica">
           <End Type="BDModel.articulo" Role="articulo" Multiplicity="1" />
@@ -930,6 +920,18 @@
             </Principal>
             <Dependent Role="movimientodet">
               <PropertyRef Name="ArticuloId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fkRubroCategoria">
+          <End Type="BDModel.rubro" Role="rubro" Multiplicity="0..1" />
+          <End Type="BDModel.categoria" Role="categoria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rubro">
+              <PropertyRef Name="RubroId" />
+            </Principal>
+            <Dependent Role="categoria">
+              <PropertyRef Name="RubroId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1045,14 +1047,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="rubro">
-            <EntityTypeMapping TypeName="BDModel.rubro">
-              <MappingFragment StoreEntitySet="rubro">
-                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
-                <ScalarProperty Name="RubroId" ColumnName="RubroId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="serie">
             <EntityTypeMapping TypeName="BDModel.serie">
               <MappingFragment StoreEntitySet="serie">
@@ -1076,21 +1070,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="articulo">
-            <EntityTypeMapping TypeName="BDModel.articulo">
-              <MappingFragment StoreEntitySet="articulo">
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
-                <ScalarProperty Name="Precio" ColumnName="Precio" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
-                <ScalarProperty Name="MarcaId" ColumnName="MarcaId" />
-                <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="articulodet">
             <EntityTypeMapping TypeName="BDModel.articulodet">
               <MappingFragment StoreEntitySet="articulodet">
@@ -1106,6 +1085,30 @@
                 <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
                 <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
                 <ScalarProperty Name="CaracteristicaId" ColumnName="CaracteristicaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="articulo">
+            <EntityTypeMapping TypeName="BDModel.articulo">
+              <MappingFragment StoreEntitySet="articulo">
+                <ScalarProperty Name="Detalle" ColumnName="Detalle" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="CategoriaId" ColumnName="CategoriaId" />
+                <ScalarProperty Name="MarcaId" ColumnName="MarcaId" />
+                <ScalarProperty Name="ArticuloId" ColumnName="ArticuloId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rubro">
+            <EntityTypeMapping TypeName="BDModel.rubro">
+              <MappingFragment StoreEntitySet="rubro">
+                <ScalarProperty Name="Denominacion" ColumnName="Denominacion" />
+                <ScalarProperty Name="RubroId" ColumnName="RubroId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

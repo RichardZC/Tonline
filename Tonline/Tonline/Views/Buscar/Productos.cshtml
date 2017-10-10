@@ -20,7 +20,7 @@
         <div class="product-card">
             <div class="card">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2">S/{{a.Precio}}</a>
+                    <a class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2">S/{{a.Precio}}</a>
                     <a href="/Detalle/Index/{{a.ArticuloId}}"><img src="~/images/img2.jpg" alt="product-img"></a>
                 </div>
                 <ul class="card-action-buttons">
@@ -51,9 +51,7 @@
         myapp.controller("ctrl", function ($scope, $http, servicio) {
             $scope.servicio = servicio;
             $scope.productos = [];
-            var txt = '@ViewBag.id';
-            $http.get('@Url.Action("BuscarProducto", "Buscar")',{ params: { pClave: txt } })
-                   .success(function (d) { $scope.productos = d; }).error(function () { });
+           
 
 
         });
