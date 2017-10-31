@@ -103,6 +103,7 @@
             $("#frmLogin,#frmCliente,#frmConfirmar").hide();
             var sesion = localStorage.getItem("user");
             //var user = {};
+            var pedidos = {};
             if (sesion != null) {
                 //user = JSON.parse(sesion);
                 $("#frmCliente,#frmConfirmar").show();
@@ -110,9 +111,11 @@
                 $http.get('@Url.Action("ObtenerPersonaUsuario", "Maestro")', { params: { usuario: sesion } })
                               .success(function (d) {
                                   $scope.persona = d;
+                                  pedidos = { pClienteId: d.PersonaId, pPedidos: servicio.carrito };
+                                  //console.log(pedidos);
                               });
 
-             
+
             }
             else {
                 $("#frmLogin").show();
@@ -121,18 +124,20 @@
 
 
 
-            var pedidos = JSON.stringify({ pClienteId: sesion.UsuarioId, pPedidos: servicio.carrito });
-            console.log(pedidos);
+            //var pedidos = JSON.stringify({ pClienteId: sesion.UsuarioId, pPedidos: servicio.carrito });
+            
 
             $("#btnPedido").click(function () {
                 $.ajax({
+                    url: '@Url.Action("RealizarPedido", "Comprar")',
                     type: 'post',
                     datatype: 'json',
                     contenttype: 'application/json; charset=utf-8',
                     data: pedidos,
                     success: function () {
-                        localStorage.removeItem("cart");
-                        window.location = '@Url.Action("Index","Home")';
+                        alert(123);
+                        //localStorage.removeItem("cart");
+                        //window.location = '@Url.Action("Index","Home")';
                     }
                 });
             });

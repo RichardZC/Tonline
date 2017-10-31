@@ -22,7 +22,7 @@ namespace Tonline.Controllers
     }
     public class Pedido
     {
-        public int ProductoId { get; set; }
+        public int ArticuloId { get; set; }
         public string Denominacion { get; set; }
         public int Cantidad { get; set; }
         public decimal Precio { get; set; }
