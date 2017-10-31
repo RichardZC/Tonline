@@ -17,6 +17,7 @@ namespace Tonline.Controllers
         }
         [HttpPost]
         public JsonResult RealizarPedido(int pClienteId, List<Pedido>pPedidos) {
+            // guardar pedido en base de datos
             return Json(true);
         }
     }

@@ -135,9 +135,9 @@
                     contenttype: 'application/json; charset=utf-8',
                     data: pedidos,
                     success: function () {
-                        alert(123);
-                        //localStorage.removeItem("cart");
-                        //window.location = '@Url.Action("Index","Home")';
+                        //alert(123);
+                        localStorage.removeItem("cart");
+                        window.location = '@Url.Action("Index","Home")';
                     }
                 });
             });
